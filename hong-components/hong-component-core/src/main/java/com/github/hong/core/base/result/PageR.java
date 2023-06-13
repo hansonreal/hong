@@ -48,7 +48,7 @@ public class PageR<E> implements IR {
     }
 
 
-    public static <T> PageR<T> ok(Long total, List<T> rows) {
+    public static <E> PageR<E> ok(Long total, List<E> rows) {
         return new PageR<>(ApiCodeEnum.SUCCESS, total, rows);
     }
 

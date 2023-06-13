@@ -35,7 +35,7 @@ public class LogAspect {
 
 
 
-    @Pointcut("@annotation(com.github.mini.common.ann.MethodLog)")
+    @Pointcut("@annotation(com.github.hong.core.annotation.MethodLog)")
     public void logPointCut() {
     }
 
