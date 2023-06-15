@@ -2,7 +2,7 @@ server:
   port: 9010
 spring:
   application:
-    name: RMS_MC
+    name: hong_MC
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -43,10 +43,11 @@ spring:
     password: ${REDIS_PASSWORD:}
 logging:
   level:
-    ls.ov: debug
+    root: info
     web: debug
+    com.github.hong: debug
   file:
-    name: ./logs/rmsmc.log #日志存放位置以及名称
+    name: ./logs/hong.log #日志存放位置以及名称
 mybatis-plus:
   configuration:
     database-id: oracle
@@ -68,21 +69,21 @@ hong:
         title: 认证模块
         base-path:
           - ${server.servlet.context-path}
-        base-package: ls.ov.rms.auth
+        base-package: com.github.hong.auth
       support:
         title: 支撑模块
         base-path:
           - ${server.servlet.context-path}
-        base-package: ls.ov.rms.support
+        base-package: com.github.hong.support
       log:
         title: 日志模块
         base-path:
           - ${server.servlet.context-path}
-        base-package: ls.ov.rms.log
+        base-package: com.github.hong.log
     basic:
       enable: true
-      username: rms
-      password: rms
+      username: hong
+      password: hong
     auth-key: iToken
     global-operation-parameters:
       - name: app_language

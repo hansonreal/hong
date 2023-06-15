@@ -3,17 +3,15 @@ package com.github.hong.auth.config;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import static ls.ov.rms.auth.config.CaptchaConfigProperties.CAPTCHA_PREFIX;
-
 /**
  * 验证码配置参数对象
  * @author hanson
  * @since 2023/6/12
  */
 @Data
-@ConfigurationProperties(prefix = CAPTCHA_PREFIX)
+@ConfigurationProperties(prefix = CaptchaConfigProperties.CAPTCHA_PREFIX)
 public class CaptchaConfigProperties {
-    public static final String CAPTCHA_PREFIX = "rms.captcha";
+    public static final String CAPTCHA_PREFIX = "hong.captcha";
 
     /**
      * 是否开启验证码

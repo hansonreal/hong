@@ -1,8 +1,8 @@
 package com.github.hong.auth.config;
 
+import com.github.hong.core.utils.RsaUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import ls.ov.rms.utils.RsaUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.ClassPathResource;
 
@@ -11,8 +11,6 @@ import java.io.InputStream;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-import static ls.ov.rms.auth.config.RsaKeyConfigProperties.RSA_PREFIX;
-
 /**
  * RSA密钥配置类
  * @author hanson
@@ -20,10 +18,10 @@ import static ls.ov.rms.auth.config.RsaKeyConfigProperties.RSA_PREFIX;
  */
 @Slf4j
 @Data
-@ConfigurationProperties(prefix = RSA_PREFIX)
+@ConfigurationProperties(prefix = RsaKeyConfigProperties.RSA_PREFIX)
 public class RsaKeyConfigProperties {
 
-    public static final String RSA_PREFIX = "rms.rsa.key";
+    public static final String RSA_PREFIX = "hong.rsa.key";
 
     private String pubKeyFilePath;
     private String priKeyFilePath;

@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import static ls.ov.rms.auth.config.AuthConfigProperties.AUTH_PREFIX;
-
 /**
  * 认证服务配置类
  *
@@ -14,9 +12,9 @@ import static ls.ov.rms.auth.config.AuthConfigProperties.AUTH_PREFIX;
  */
 @Slf4j
 @Data
-@ConfigurationProperties(prefix = AUTH_PREFIX)
+@ConfigurationProperties(prefix = AuthConfigProperties.AUTH_PREFIX)
 public class AuthConfigProperties {
-    public static final String AUTH_PREFIX = "rms.auth";
+    public static final String AUTH_PREFIX = "hong.auth";
 
     /**
      * access_token 名称
