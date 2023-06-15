@@ -2,14 +2,32 @@ package com.github.hong.core.annotation;
 
 import java.lang.annotation.*;
 
-/*
- * 方法级日志切面注解
- * @author hanson
- * @date 2022/03/08 19:00
+/**
+ * 操作日志注解
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface MethodLog {
-    String remark() default "";
+    /**
+     * 描述
+     *
+     * @return {String}
+     */
+    String value();
+
+    /**
+     * 记录执行参数
+     *
+     * @return true 记录（默认值） | false 不记录
+     */
+    boolean recordReqParam() default true;
+
+    /**
+     * 记录返回参数
+     *
+     * @return true 记录（默认值） | false 不记录
+     */
+    boolean recordRespParam() default true;
 }
+

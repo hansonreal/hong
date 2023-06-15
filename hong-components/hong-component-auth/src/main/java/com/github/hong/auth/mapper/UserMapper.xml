@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hong.auth.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.hong.entity.auth.User">
+        <id column="USER_ID" property="userId"/>
+        <result column="NAME" property="name"/>
+        <result column="PHONE" property="phone"/>
+        <result column="EMAIL" property="email"/>
+        <result column="PROF_PICTURE" property="profPicture"/>
+        <result column="LOCKED" property="locked"/>
+        <result column="LOCKED_TIME" property="lockedTime"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        USER_ID, NAME, PHONE, EMAIL, PROF_PICTURE, LOCKED, LOCKED_TIME, LAST_LOGIN_TIME, CREATE_TIME, UPDATE_TIME
+    </sql>
+
+</mapper>

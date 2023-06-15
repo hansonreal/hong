@@ -1,0 +1,94 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: RMS_MC
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@10.169.1.47:1521:nearmsdv
+    username: eeos_cis
+    password: 7Z-2QTobuQ--i-___-Rt
+    hikari:
+      idle-timeout: 50000
+      connection-timeout: 60000
+      validation-timeout: 3000
+      max-lifetime: 60000
+      minimum-idle: 100
+      maximum-pool-size: 300
+      login-timeout: 5
+      read-only: false
+      connection-test-query: SELECT 1 FROM DUAL
+  cache:
+    type: redis
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    database: 1
+    timeout: 1000
+    password: ${REDIS_PASSWORD:}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  level:
+    ls.ov: debug
+    web: debug
+  file:
+    name: ./logs/rmsmc.log #日志存放位置以及名称
+mybatis-plus:
+  configuration:
+    database-id: oracle
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: input
+hong:
+  rsa:
+    key:
+      pri-key-file-path: key/hong_rsa.pri
+      pub-key-file-path: key/hong_rsa.pub
+  swagger:
+    enabled: true
+    production: false
+    docket:
+      auth:
+        title: 认证模块
+        base-path:
+          - ${server.servlet.context-path}
+        base-package: ls.ov.rms.auth
+      support:
+        title: 支撑模块
+        base-path:
+          - ${server.servlet.context-path}
+        base-package: ls.ov.rms.support
+      log:
+        title: 日志模块
+        base-path:
+          - ${server.servlet.context-path}
+        base-package: ls.ov.rms.log
+    basic:
+      enable: true
+      username: rms
+      password: rms
+    auth-key: iToken
+    global-operation-parameters:
+      - name: app_language
+        description: 语言环境
+        required: true
+        defaultValue: zh_CN
+        allowEmptyValue: false
+        order: 1
+  captcha:
+    enabled: true # 是否开启验证码
+    expire: 300 # 验证码有效期，单位秒
+  auth:
+    allow-cross-origin: true # 是否开启跨域，开发环境建议开启，生产环境建议再NG上进行配置
+    access-token-name: iToken # TOKEN 名称
+    access-token-exp: 120    # TOKEN 有效期，单位分钟

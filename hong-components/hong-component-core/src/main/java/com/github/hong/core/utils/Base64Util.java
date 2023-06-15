@@ -1,0 +1,67 @@
+package com.github.hong.core.utils;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
+/**
+ * base64 加密工具类
+ */
+public class Base64Util {
+
+    public static final Base64.Encoder encoder = Base64.getEncoder();
+    public static final Base64.Decoder decoder = Base64.getDecoder();
+    private Base64Util() {
+
+    }
+
+    /**
+     * base64加密
+     *
+     * @param encodeText 明文
+     * @return 加密之后的结果
+     */
+    public static byte[] encoder(byte[] encodeText) {
+        return encoder.encode(encodeText);
+    }
+
+    /**
+     * base64加密
+     *
+     * @param data 明文
+     * @return 加密之后的结果
+     */
+    public static byte[] encoder(String data) {
+        byte[] bytes = data.getBytes(StandardCharsets.UTF_8);
+        return encoder.encode(bytes);
+    }
+
+    /**
+     * base64解密
+     *
+     * @param decodeText 密文
+     */
+    public static byte[] decoder(byte[] decodeText) {
+        return decoder.decode(decodeText);
+    }
+
+    /**
+     * base64解密
+     *
+     * @param data 密文
+     */
+    public static byte[] decoder(String data) {
+        byte[] bytes = data.getBytes(StandardCharsets.UTF_8);
+        return decoder.decode(bytes);
+    }
+
+    /**
+     * base64加密
+     *
+     * @param dataSrc 密文
+     */
+    public static String encode(byte[] dataSrc) {
+        return encoder.encodeToString(dataSrc);
+    }
+
+
+}

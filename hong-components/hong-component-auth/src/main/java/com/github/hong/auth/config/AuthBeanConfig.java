@@ -1,24 +1,23 @@
 package com.github.hong.auth.config;
 
-import com.github.hong.auth.context.properties.AuthConfigProperties;
-import com.github.hong.auth.context.properties.RsaKeyConfigProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
+import ls.ov.rms.auth.context.handler.AuthExceptionHandler;
+import ls.ov.rms.common.config.BaseConfig;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @classname: AuthBeanConfig
- * @desc: Auth模块Bean配置类
- * @author: hanson
- * @history:
+ * 认证配置类
+ *
+ * @author hanson
+ * @since 2023/6/5
  */
 @Configuration
-@EnableConfigurationProperties({
-        AuthConfigProperties.class,
-        RsaKeyConfigProperties.class
-})
-@ComponentScan("com.github.hong.auth")
-public class AuthBeanConfig {
+public class AuthBeanConfig extends BaseConfig {
 
+
+    @Bean
+    public AuthExceptionHandler authExceptionHandlerBean() {
+        return new AuthExceptionHandler();
+    }
 
 }
