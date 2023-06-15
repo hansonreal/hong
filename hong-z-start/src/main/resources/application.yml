@@ -3,15 +3,26 @@ server:
 spring:
   application:
     name: RMS_MC
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-bean-definition-overriding: true
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@10.169.1.47:1521:nearmsdv
-    username: eeos_cis
-    password: 7Z-2QTobuQ--i-___-Rt
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: h2
+    password: h2
     hikari:
       idle-timeout: 50000
       connection-timeout: 60000
@@ -30,11 +41,6 @@ spring:
     database: 1
     timeout: 1000
     password: ${REDIS_PASSWORD:}
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  main:
-    allow-bean-definition-overriding: true
 logging:
   level:
     ls.ov: debug
