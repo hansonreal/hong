@@ -112,7 +112,7 @@ public class Knife4jAutoConfiguration implements BeanFactoryAware {
                     .globalResponseMessage(RequestMethod.PUT, getResponseMessages())
                     .globalResponseMessage(RequestMethod.DELETE, getResponseMessages())
                     //.extensions(Lists.newArrayList(new OrderExtensions(swaggerProperties.getOrder())))
-            ;
+                    ;
 
             configurableBeanFactory.registerSingleton(groupName, docket);
             docketList.add(docket);

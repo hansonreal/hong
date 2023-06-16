@@ -1,7 +1,6 @@
 package com.github.hong.auth.security.filter;
 
 import com.github.hong.auth.config.AuthConfigProperties;
-import com.github.hong.auth.config.RsaKeyConfigProperties;
 import com.github.hong.auth.context.model.JwtUserDetails;
 import com.github.hong.auth.context.model.JwtUserInfo;
 import com.github.hong.auth.context.utils.JwtUtil;
@@ -38,8 +37,6 @@ import java.security.PublicKey;
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private RsaKeyConfigProperties rsaKeyConfigProperties;
-
 
     private AuthConfigProperties authConfigProperties;
 
@@ -73,7 +70,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return null; //放行,并交给UsernamePasswordAuthenticationFilter进行验证,返回公共错误信息.
         }
 
-        PublicKey publicKey = rsaKeyConfigProperties.getPublicKey();
+        PublicKey publicKey = authConfigProperties.getPublicKey();
         JwtUserInfo jwtPayload = JwtUtil.getJwtFromToken(authToken, publicKey);
         //token字符串解析失败
         if (ObjectUtils.isEmpty(jwtPayload)) {

@@ -2,7 +2,6 @@ package com.github.hong.auth.security.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.github.hong.auth.config.AuthConfigProperties;
-import com.github.hong.auth.config.RsaKeyConfigProperties;
 import com.github.hong.auth.context.constants.AuthCS;
 import com.github.hong.auth.context.exception.RmsAuthenticationException;
 import com.github.hong.auth.context.model.JwtUserDetails;
@@ -37,14 +36,11 @@ public class AuthService implements IAuthService {
 
     private final AuthenticationManager authenticationManager;
     private final AuthConfigProperties authConfigProperties;
-    private final RsaKeyConfigProperties rsaKeyConfigProperties;
 
     public AuthService(AuthenticationManager authenticationManager,
-                       AuthConfigProperties authConfigProperties,
-                       RsaKeyConfigProperties rsaKeyConfigProperties) {
+                       AuthConfigProperties authConfigProperties) {
         this.authenticationManager = authenticationManager;
         this.authConfigProperties = authConfigProperties;
-        this.rsaKeyConfigProperties = rsaKeyConfigProperties;
     }
 
 
@@ -88,7 +84,7 @@ public class AuthService implements IAuthService {
         TokenService.processTokenCache(jwtUserDetails, cacheKey, accessTokenExpSec);
 
         //7.构建返回值
-        PrivateKey privateKey = rsaKeyConfigProperties.getPrivateKey();
+        PrivateKey privateKey = authConfigProperties.getPrivateKey();
         JwtUserInfo jwtUserInfo = new JwtUserInfo();
         jwtUserInfo.setUserId(sysUser.getUserId());
         jwtUserInfo.setCreated(System.currentTimeMillis());

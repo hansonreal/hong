@@ -1,7 +1,6 @@
 package com.github.hong.auth.security;
 
 import com.github.hong.auth.config.AuthConfigProperties;
-import com.github.hong.auth.config.RsaKeyConfigProperties;
 import com.github.hong.auth.security.authentication.AuthenticationEntryPointCustomizer;
 import com.github.hong.auth.security.filter.JwtAuthenticationFilter;
 import com.github.hong.auth.security.handler.AccessDeniedHandlerCustomizer;
@@ -40,10 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthConfigProperties authConfigProperties;
-
-
-    @Autowired
-    private RsaKeyConfigProperties rsaKeyConfigProperties;
 
 
     @Bean
@@ -144,7 +139,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers(anonymousUrls.toArray(new String[0])).permitAll()//可以匿名被访问的URL
                 .and().authorizeRequests().anyRequest().authenticated()// 除上面外的所有请求全部需要鉴权认证
                 .and().addFilterBefore(
-                        new JwtAuthenticationFilter(rsaKeyConfigProperties, authConfigProperties),
+                        new JwtAuthenticationFilter(authConfigProperties),
                         UsernamePasswordAuthenticationFilter.class) // 添加JWT 认证过滤器filter
                 .headers().cacheControl();// 禁用缓存
     }

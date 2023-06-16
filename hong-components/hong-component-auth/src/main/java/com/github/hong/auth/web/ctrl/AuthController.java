@@ -2,7 +2,6 @@ package com.github.hong.auth.web.ctrl;
 
 import com.github.hong.auth.config.AuthConfigProperties;
 import com.github.hong.auth.config.CaptchaConfigProperties;
-import com.github.hong.auth.config.RsaKeyConfigProperties;
 import com.github.hong.auth.context.CaptchaContext;
 import com.github.hong.auth.context.constants.AuthCS;
 import com.github.hong.auth.context.enums.CaptchaReceiveMode;
@@ -56,19 +55,16 @@ public class AuthController {
 
     private final AuthConfigProperties authConfigProperties;
 
-    private final RsaKeyConfigProperties rsaKeyConfigProperties;
 
     private final CaptchaConfigProperties captchaConfigProperties;
 
     public AuthController(IAuthService authService,
                           IUserService userService,
                           AuthConfigProperties authConfigProperties,
-                          RsaKeyConfigProperties rsaKeyConfigProperties,
                           CaptchaConfigProperties captchaConfigProperties) {
         this.authService = authService;
         this.userService = userService;
         this.authConfigProperties = authConfigProperties;
-        this.rsaKeyConfigProperties = rsaKeyConfigProperties;
         this.captchaConfigProperties = captchaConfigProperties;
     }
 
@@ -118,7 +114,7 @@ public class AuthController {
     @MethodLog(value = "获取公钥")
     @ApiOperation(value = "获取公钥", notes = "用于获取公钥，便于客户端加密数据")
     public DataR<String> obtainPublicKey() {
-        PublicKey publicKey = rsaKeyConfigProperties.getPublicKey();
+        PublicKey publicKey = authConfigProperties.getPublicKey();
         String publicKeyStr = RsaUtil.getPublicKeyStr(publicKey);
         return DataR.success(publicKeyStr);
     }
@@ -131,7 +127,7 @@ public class AuthController {
         String encrypt = null;
         try {
             String unencryptedData = StreamUtil.getString(request.getInputStream());
-            encrypt = RsaUtil.encrypt(unencryptedData, rsaKeyConfigProperties.getPublicKey());
+            encrypt = RsaUtil.encrypt(unencryptedData, authConfigProperties.getPublicKey());
         } catch (Exception e) {
             BizException.throwExp(ApiCodeEnum.UNKNOWN_EXP, "数据加密发生异常");
         }

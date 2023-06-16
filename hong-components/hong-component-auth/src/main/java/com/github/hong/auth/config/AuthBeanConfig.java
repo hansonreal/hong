@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 2023/6/5
  */
 @EnableConfigurationProperties({
-        RsaKeyConfigProperties.class,
         AuthConfigProperties.class,
         CaptchaConfigProperties.class
 })
@@ -23,7 +22,6 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.github.hong.auth.mapper")
 @ComponentScan({"com.github.hong.auth"})
 public class AuthBeanConfig extends BaseConfig {
-
 
     @Bean
     public AuthExceptionHandler authExceptionHandlerBean() {

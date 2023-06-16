@@ -1,8 +1,15 @@
 package com.github.hong.auth.config;
 
+import com.github.hong.core.utils.RsaUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.io.ClassPathResource;
+
+import javax.annotation.PostConstruct;
+import java.io.InputStream;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 /**
  * 认证服务配置类
@@ -31,6 +38,26 @@ public class AuthConfigProperties {
      **/
     private boolean allowCrossOrigin = true;
 
+    /**
+     * 公钥文件路径
+     */
+    private String pubKeyFilePath;
+
+    /**
+     * 私钥文件路径
+     */
+    private String priKeyFilePath;
+
+    /**
+     * 公钥对象
+     */
+    private PublicKey publicKey;
+
+    /**
+     * 私钥对象
+     */
+    private PrivateKey privateKey;
+
 
     /**
      * @return 返回失效时间，单位秒
@@ -38,4 +65,18 @@ public class AuthConfigProperties {
     public Long getAccessTokenExpSec() {
         return accessTokenExp * 60;
     }
+
+
+    @PostConstruct
+    public void initRsaKey() throws Exception {
+        log.info("pubKeyFile:{}", pubKeyFilePath);
+        log.info("priKeyFile:{}", priKeyFilePath);
+        ClassPathResource pubKeyFileResource = new ClassPathResource(pubKeyFilePath);
+        InputStream pubKeyFileInputStream = pubKeyFileResource.getInputStream();
+        publicKey = RsaUtil.getPublicKey(pubKeyFileInputStream);
+        ClassPathResource priKeyFileResource = new ClassPathResource(priKeyFilePath);
+        InputStream priKeyFileInputStream = priKeyFileResource.getInputStream();
+        privateKey = RsaUtil.getPrivateKey(priKeyFileInputStream);
+    }
+
 }

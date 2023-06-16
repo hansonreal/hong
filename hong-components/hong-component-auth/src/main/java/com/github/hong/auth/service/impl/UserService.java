@@ -2,7 +2,7 @@ package com.github.hong.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.hong.auth.config.RsaKeyConfigProperties;
+import com.github.hong.auth.config.AuthConfigProperties;
 import com.github.hong.auth.context.enums.LockedStateEnum;
 import com.github.hong.auth.mapper.UserMapper;
 import com.github.hong.auth.service.IUserAuthService;
@@ -33,9 +33,8 @@ import java.util.Date;
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> implements IUserService {
 
-
     @Autowired
-    private RsaKeyConfigProperties rsaKeyConfigProperties;
+    private AuthConfigProperties authConfigProperties;
 
     @Autowired
     private IUserAuthService userAuthService;
@@ -66,7 +65,7 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
         if (!StringUtils.hasText(pwd)) {
             BizException.throwExp(ApiCodeEnum.PWD_NOT_BE_EMPTY_EXP);
         } else {
-            PrivateKey privateKey = rsaKeyConfigProperties.getPrivateKey();
+            PrivateKey privateKey = authConfigProperties.getPrivateKey();
             try {
                 String pwdSrc = RsaUtil.decrypt(pwd, privateKey);
                 // 密码规则校验
