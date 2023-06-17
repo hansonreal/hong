@@ -1,7 +1,7 @@
 package com.github.hong.auth.security.service.impl;
 
 import cn.hutool.core.util.IdUtil;
-import com.github.hong.auth.config.AuthConfigProperties;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.constants.AuthCS;
 import com.github.hong.auth.context.exception.RmsAuthenticationException;
 import com.github.hong.auth.context.model.JwtUserDetails;

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.github.hong.auth.AuthAutoConfiguration
+    com.github.hong.auth.config.AuthAutoConfiguration

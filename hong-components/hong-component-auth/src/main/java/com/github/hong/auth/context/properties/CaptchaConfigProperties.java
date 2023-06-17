@@ -1,4 +1,4 @@
-package com.github.hong.auth.config;
+package com.github.hong.auth.context.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

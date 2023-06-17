@@ -1,6 +1,6 @@
 package com.github.hong.auth.security.filter;
 
-import com.github.hong.auth.config.AuthConfigProperties;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.model.JwtUserDetails;
 import com.github.hong.auth.context.model.JwtUserInfo;
 import com.github.hong.auth.context.utils.JwtUtil;

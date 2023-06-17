@@ -2,7 +2,7 @@ package com.github.hong.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.hong.auth.config.AuthConfigProperties;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.enums.LockedStateEnum;
 import com.github.hong.auth.mapper.UserMapper;
 import com.github.hong.auth.service.IUserAuthService;

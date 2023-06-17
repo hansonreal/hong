@@ -1,4 +1,4 @@
-package com.github.hong.auth.config;
+package com.github.hong.auth.context.properties;
 
 import com.github.hong.core.utils.RsaUtil;
 import lombok.Data;

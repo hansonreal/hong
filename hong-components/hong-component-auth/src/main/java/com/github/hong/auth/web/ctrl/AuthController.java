@@ -1,7 +1,7 @@
 package com.github.hong.auth.web.ctrl;
 
-import com.github.hong.auth.config.AuthConfigProperties;
-import com.github.hong.auth.config.CaptchaConfigProperties;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
+import com.github.hong.auth.context.properties.CaptchaConfigProperties;
 import com.github.hong.auth.context.CaptchaContext;
 import com.github.hong.auth.context.constants.AuthCS;
 import com.github.hong.auth.context.enums.CaptchaReceiveMode;

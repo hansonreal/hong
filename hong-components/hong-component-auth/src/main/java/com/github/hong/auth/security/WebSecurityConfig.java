@@ -1,6 +1,6 @@
 package com.github.hong.auth.security;
 
-import com.github.hong.auth.config.AuthConfigProperties;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.security.authentication.AuthenticationEntryPointCustomizer;
 import com.github.hong.auth.security.filter.JwtAuthenticationFilter;
 import com.github.hong.auth.security.handler.AccessDeniedHandlerCustomizer;
