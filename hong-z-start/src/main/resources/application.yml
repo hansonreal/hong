@@ -57,13 +57,30 @@ mybatis-plus:
     db-config:
       id-type: input
 hong:
-  rsa:
-    key:
-      pri-key-file-path: key/hong_rsa.pri
-      pub-key-file-path: key/hong_rsa.pub
+  captcha:
+    enabled: true # 是否开启验证码
+    expire: 300 # 验证码有效期，单位秒
+  auth:
+    allow-cross-origin: true # 是否开启跨域，开发环境建议开启，生产环境建议再NG上进行配置
+    access-token-name: iToken # TOKEN 名称
+    access-token-exp: 120    # TOKEN 有效期，单位分钟
+    pri-key-file-path: key/auth_rsa.pri # 私钥文件路径
+    pub-key-file-path: key/auth_rsa.pub # 公钥文件路径
   swagger:
     enabled: true
     production: false
+    basic:
+      enable: true
+      username: hong
+      password: hong
+    auth-key: iToken
+    global-operation-parameters:
+      - name: app_language
+        description: 语言环境
+        required: true
+        defaultValue: zh_CN
+        allowEmptyValue: false
+        order: 1
     docket:
       auth:
         title: 认证模块
@@ -80,22 +97,3 @@ hong:
         base-path:
           - ${server.servlet.context-path}
         base-package: com.github.hong.log
-    basic:
-      enable: true
-      username: hong
-      password: hong
-    auth-key: iToken
-    global-operation-parameters:
-      - name: app_language
-        description: 语言环境
-        required: true
-        defaultValue: zh_CN
-        allowEmptyValue: false
-        order: 1
-  captcha:
-    enabled: true # 是否开启验证码
-    expire: 300 # 验证码有效期，单位秒
-  auth:
-    allow-cross-origin: true # 是否开启跨域，开发环境建议开启，生产环境建议再NG上进行配置
-    access-token-name: iToken # TOKEN 名称
-    access-token-exp: 120    # TOKEN 有效期，单位分钟
