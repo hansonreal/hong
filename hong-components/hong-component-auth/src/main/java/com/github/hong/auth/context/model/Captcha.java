@@ -22,7 +22,7 @@ public class Captcha {
     private String verCodeKey;
 
     @ApiModelProperty(value = "验证码")
-    private String verCode;
+    private String verCodeVal;
 
     @ApiModelProperty(value = "有效期，单位秒")
     private Long expire;
