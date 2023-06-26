@@ -1,5 +1,6 @@
 package com.github.hong.knife4j.config;
 
+import com.github.hong.common.config.BaseConfig;
 import com.github.hong.knife4j.constants.SwaggerCS;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
         }
 )
 @Import({BeanValidatorPluginsConfiguration.class})
-public class Knife4jWebMvcConfig implements WebMvcConfigurer {
+public class Knife4jWebMvcConfig extends BaseConfig implements WebMvcConfigurer {
 
     /**
      * 这个地方要重新注入一下资源文件，不然不会注入资源的，也没有注入requestHandlerMappping,相当于xml配置的

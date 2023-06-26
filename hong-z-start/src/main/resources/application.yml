@@ -36,11 +36,10 @@ spring:
   cache:
     type: redis
   redis:
-    host: ${REDIS_HOST:127.0.0.1}
-    port: ${REDIS_PORT:6379}
-    database: 1
+    host: 127.0.0.1
+    port: 6379
     timeout: 1000
-    password: ${REDIS_PASSWORD:}
+    database: 15
 logging:
   level:
     root: info

@@ -1,5 +1,6 @@
 package com.github.hong.log.config;
 
+import com.github.hong.common.config.BaseConfig;
 import com.github.hong.common.thread.ThreadConfig;
 import com.github.hong.common.thread.ThreadPoolTaskExecutorWrapper;
 import org.mybatis.spring.annotation.MapperScan;
@@ -21,7 +22,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @MapperScan("com.github.hong.log.mapper")
 @ComponentScan("com.github.hong.log")
 @EnableConfigurationProperties(LogConfigProperties.class)
-public class LogBeanConfig {
+public class LogBeanConfig extends BaseConfig {
 
     @Bean(name = "logAsyncServiceExecutor")
     public Executor orderAsyncServiceExecutor(

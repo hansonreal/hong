@@ -1,0 +1,3 @@
+CREATE TABLE SYS_USER(
+
+)

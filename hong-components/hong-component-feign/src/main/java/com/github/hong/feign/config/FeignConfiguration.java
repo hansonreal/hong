@@ -1,5 +1,6 @@
 package com.github.hong.feign.config;
 
+import com.github.hong.common.config.BaseConfig;
 import feign.*;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Configuration
 @ComponentScan("com.github.hong.feign")
-public class FeignConfiguration {
+public class FeignConfiguration extends BaseConfig {
 
     @Bean
     @Primary
