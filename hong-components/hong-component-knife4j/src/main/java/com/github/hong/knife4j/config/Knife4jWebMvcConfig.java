@@ -1,7 +1,7 @@
 package com.github.hong.knife4j.config;
 
 import com.github.hong.common.config.BaseConfig;
-import com.github.hong.knife4j.constants.SwaggerCS;
+import com.github.hong.knife4j.context.constants.SwaggerCS;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(
         basePackages = {
                 "com.github.xiaoymin.knife4j.spring.plugin",
-                "com.github.xiaoymin.knife4j.spring.web"
+                "com.github.xiaoymin.knife4j.spring.web",
+                "com.github.hong.knife4j"
         }
 )
 @Import({BeanValidatorPluginsConfiguration.class})

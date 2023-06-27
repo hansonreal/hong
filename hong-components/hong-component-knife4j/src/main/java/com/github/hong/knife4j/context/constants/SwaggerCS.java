@@ -1,4 +1,4 @@
-package com.github.hong.knife4j.constants;
+package com.github.hong.knife4j.context.constants;
 
 /**
  * Swagger 常量类

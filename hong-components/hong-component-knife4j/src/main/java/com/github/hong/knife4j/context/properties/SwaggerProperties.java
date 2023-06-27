@@ -1,6 +1,6 @@
-package com.github.hong.knife4j.config;
+package com.github.hong.knife4j.context.properties;
 
-import com.github.hong.knife4j.constants.SwaggerCS;
+import com.github.hong.knife4j.context.constants.SwaggerCS;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

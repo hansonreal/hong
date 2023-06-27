@@ -1,9 +1,9 @@
-package com.github.hong.knife4j;
+package com.github.hong.knife4j.config;
 
 import com.github.hong.core.base.code.ApiCodeEnum;
 import com.github.hong.knife4j.config.Knife4jWebMvcConfig;
-import com.github.hong.knife4j.config.SwaggerProperties;
-import com.github.hong.knife4j.constants.SwaggerCS;
+import com.github.hong.knife4j.context.constants.SwaggerCS;
+import com.github.hong.knife4j.context.properties.SwaggerProperties;
 import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;
 import com.github.xiaoymin.knife4j.spring.filter.SecurityBasicAuthFilter;
 import com.google.common.base.Predicate;

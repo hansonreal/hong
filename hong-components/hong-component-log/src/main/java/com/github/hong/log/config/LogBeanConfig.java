@@ -3,6 +3,7 @@ package com.github.hong.log.config;
 import com.github.hong.common.config.BaseConfig;
 import com.github.hong.common.thread.ThreadConfig;
 import com.github.hong.common.thread.ThreadPoolTaskExecutorWrapper;
+import com.github.hong.log.context.properties.LogConfigProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

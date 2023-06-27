@@ -56,6 +56,7 @@
         <oracle.version>11.2.0.4</oracle.version>
         <jwt.version>0.11.5</jwt.version>
         <hutool.version>5.8.18</hutool.version>
+        <mysql.version>8.0.32</mysql.version>
     </properties>
 
 
@@ -115,12 +116,13 @@
                 <version>${jwt.version}</version>
             </dependency>
 
-            <!--oracle-->
+            <!--mysql-->
             <dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>${oracle.version}</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
             </dependency>
+
 
             <!--mybatis-plus-->
             <dependency>

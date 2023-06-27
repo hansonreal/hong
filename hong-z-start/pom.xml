@@ -19,11 +19,11 @@
 
 
     <dependencies>
-
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
 
         <dependency>
             <groupId>com.github</groupId>
@@ -37,11 +37,11 @@
             <version>1.0.0</version>
         </dependency>
 
-       <!-- <dependency>
+        <dependency>
             <groupId>com.github</groupId>
             <artifactId>hong-component-auth</artifactId>
             <version>1.0.0</version>
-        </dependency>-->
+        </dependency>
 
 
     </dependencies>

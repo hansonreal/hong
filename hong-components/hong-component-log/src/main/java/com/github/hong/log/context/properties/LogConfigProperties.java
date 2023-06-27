@@ -1,4 +1,4 @@
-package com.github.hong.log.config;
+package com.github.hong.log.context.properties;
 
 import com.github.hong.common.thread.ThreadConfig;
 import lombok.Data;
