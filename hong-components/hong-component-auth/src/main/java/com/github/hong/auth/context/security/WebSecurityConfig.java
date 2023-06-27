@@ -171,6 +171,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "*.ico",
                         "*.webp",
                         "*.xls",
+                        "*.mp4",
                         "swagger/**",
                         "/swagger-ui.html",
                         "/swagger-ui/**",
@@ -185,7 +186,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/actuator/**",
                         "/error",
-                        "*.mp4",
                         "/**/*.mp4"   //支持mp4格式的文件匿名访问
                 )
                 .antMatchers(

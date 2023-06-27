@@ -24,18 +24,19 @@ public class HongApplication {
             String ip = InetAddress.getLocalHost().getHostAddress();
             String port = env.getProperty("server.port");
             String path = env.getProperty("server.servlet.context-path");
-            if (StringUtils.hasText(path)){
+            if (StringUtils.hasText(path)) {
                 if (path.endsWith("/")) {
                     path = path.substring(0, path.length() - 1);
                 }
-            }else{
+            } else {
                 path = "";
             }
             log.info("\n----------------------------------------------------------------------------------------------------\n\t" +
                     "Application " + appName + " is running! Access URLs:\n\t" +
                     "Local: \t\thttp://localhost:" + port + path + "/\n\t" +
                     "External:\thttp://" + ip + ":" + port + path + "/\n\t" +
-                    "Local Swagger API Doc: \t\thttp://localhost:" + port + path + "/doc.html\n" +
+                    "Local Swagger API Doc: \t\thttp://localhost:" + port + path + "/doc.html\n\t" +
+                    "External Swagger API Doc: \thttp://" + ip + ":" + port + path + "/doc.html\n" +
                     "----------------------------------------------------------------------------------------------------");
         } catch (UnknownHostException e) {
             e.printStackTrace();
