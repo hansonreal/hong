@@ -21,20 +21,22 @@ CREATE TABLE `t_sys_log`
 DROP TABLE IF EXISTS `t_sys_user`;
 CREATE TABLE `t_sys_user`
 (
-    sys_user_id BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT '系统用户ID',
-    login_name  VARCHAR(32)  NOT NULL COMMENT '登录用户名',
-    tel_phone   VARCHAR(32)  NOT NULL COMMENT '手机号',
-    email       VARCHAR(64)  NOT NULL COMMENT '电子邮箱',
-    sex         TINYINT(6)   NOT NULL DEFAULT 0 COMMENT '性别 0-未知, 1-男, 2-女',
-    avatar_url  VARCHAR(128) COMMENT '头像地址',
-    admin_flag  TINYINT(6)   NOT NULL DEFAULT 0 COMMENT '是否超管（超管拥有全部权限） 0-否 1-是',
-    user_state  TINYINT(6)   NOT NULL DEFAULT 0 COMMENT '状态 0-停用 1-启用',
-    created_at  TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    updated_at  TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+    sys_user_id BIGINT(20)                                NOT NULL AUTO_INCREMENT COMMENT '系统用户ID',
+    login_name  VARCHAR(32)                               NOT NULL COMMENT '登录用户名',
+    email       VARCHAR(128)                              NULL COMMENT '电子邮箱',
+    tel_phone   VARCHAR(32)                               NOT NULL COMMENT '手机号',
+    sex         TINYINT(6)   DEFAULT 0                    NOT NULL COMMENT '性别 0-未知, 1-男, 2-女',
+    avatar_url  VARCHAR(128)                              NULL COMMENT '头像地址',
+    admin_flag  TINYINT(6)   DEFAULT 0                    NOT NULL COMMENT '是否超管（超管拥有全部权限） 0-否 1-是',
+    user_state  TINYINT(6)   DEFAULT 0                    NOT NULL COMMENT '状态 0-停用 1-启用',
+    created_at  TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) NOT NULL COMMENT '创建时间',
+    updated_at  TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
     PRIMARY KEY (`sys_user_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 100001
-  DEFAULT CHARSET = utf8mb4 COMMENT ='系统用户表';
+  charset = utf8mb4
+    comment '系统用户表';
+
 
 -- 系统用户认证表
 DROP TABLE IF EXISTS `t_sys_user_auth`;
