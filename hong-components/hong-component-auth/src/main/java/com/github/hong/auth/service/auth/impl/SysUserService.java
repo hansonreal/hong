@@ -52,7 +52,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
         if (!StringUtils.hasText(name)) {
             BizException.throwExp(ApiCodeEnum.NAME_NOT_BE_EMPTY_EXP);
         } else {
-            SysUser user = new SysUser().setLoginUsername(name);
+            SysUser user = new SysUser().setLoginName(name);
             boolean repeated = isRepeated(user);
             if (repeated) {
                 BizException.throwExp(ApiCodeEnum.NAME_REPEATED_EXP, name);
@@ -107,7 +107,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
 
         // 创建用户信息
         SysUser user = new SysUser()
-                .setLoginUsername(name)
+                .setLoginName(name)
                 .setTelPhone(phone)
                 .setEmail(email)
                 //.setProfPicture()
@@ -130,7 +130,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     @Override
     public boolean isRepeated(SysUser user) {
         LambdaQueryWrapper<SysUser> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(StringUtils.hasText(user.getLoginUsername()), SysUser::getLoginUsername, user.getLoginUsername())
+        lambdaQueryWrapper.eq(StringUtils.hasText(user.getLoginName()), SysUser::getLoginName, user.getLoginName())
                 .eq(StringUtils.hasText(user.getTelPhone()), SysUser::getTelPhone, user.getTelPhone())
                 .eq(StringUtils.hasText(user.getEmail()), SysUser::getEmail, user.getEmail());
         return this.baseMapper.exists(lambdaQueryWrapper);

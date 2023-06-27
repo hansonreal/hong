@@ -69,7 +69,7 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
                 userAuthList.add(userAuth);
             }
         }
-        String email = "";//user.getEmail();
+        String email = user.getEmail();
         if (StringUtils.hasText(email)) {
             // 创建默认的认证信息
             SysUserAuth userAuth = new SysUserAuth()
