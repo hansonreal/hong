@@ -24,7 +24,7 @@ public class MethodLogListener implements ApplicationListener<MethodLogEvent> {
      */
     @Override
     public void onApplicationEvent(MethodLogEvent event) {
-        SysLog logSource = (SysLog) event.getSource();
+        SysLog logSource = event.getLog();
         sysLogService.save(logSource);
     }
 }
