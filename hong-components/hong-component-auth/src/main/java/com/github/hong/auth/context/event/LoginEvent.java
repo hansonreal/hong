@@ -1,4 +1,4 @@
-package com.github.hong.auth.context.listener.event;
+package com.github.hong.auth.context.event;
 
 import lombok.Getter;
 import lombok.Setter;

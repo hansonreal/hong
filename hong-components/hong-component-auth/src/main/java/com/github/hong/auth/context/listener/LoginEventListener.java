@@ -1,6 +1,6 @@
 package com.github.hong.auth.context.listener;
 
-import com.github.hong.auth.context.listener.event.LoginEvent;
+import com.github.hong.auth.context.event.LoginEvent;
 import com.github.hong.auth.service.auth.ISysUserService;
 import com.github.hong.entity.auth.SysUser;
 import lombok.extern.slf4j.Slf4j;
