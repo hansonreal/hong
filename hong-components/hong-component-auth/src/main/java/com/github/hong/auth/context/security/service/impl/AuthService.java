@@ -69,7 +69,7 @@ public class AuthService implements IAuthService {
         }
         //3.验证通过
         JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
-        //4.这边可以处理权限信息，RMS 项目暂时没有
+        //4.这边可以处理权限信息，当前 项目暂时没有
 
         //5.将信息放置到Spring-security context中，供后续使用（当前线程）
         UsernamePasswordAuthenticationToken
