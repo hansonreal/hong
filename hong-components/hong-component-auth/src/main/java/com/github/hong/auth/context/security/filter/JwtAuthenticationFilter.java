@@ -1,4 +1,4 @@
-package com.github.hong.auth.security.filter;
+package com.github.hong.auth.context.security.filter;
 
 import com.github.hong.auth.context.model.JwtUserDetails;
 import com.github.hong.auth.context.model.JwtUserInfo;

@@ -1,4 +1,4 @@
-package com.github.hong.auth.security.handler;
+package com.github.hong.auth.context.security.handler;
 
 import com.github.hong.core.base.result.ErrorR;
 import com.github.hong.core.utils.JsonUtil;

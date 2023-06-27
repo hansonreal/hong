@@ -38,7 +38,7 @@ public class SysUserAuth implements Serializable {
     @TableField("sys_user_id")
     private String sysUserId;
 
-    @ApiModelProperty("登录类型  1-登录账号 2-手机号 3-邮箱  10-微信  11-QQ 12-支付宝 13-微博")
+    @ApiModelProperty("登录类型  1-登录账号 2-手机号 3-邮箱")
     @TableField("identity_type")
     private String identityType;
 

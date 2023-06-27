@@ -7,7 +7,7 @@ import com.github.hong.auth.context.model.Captcha;
 import com.github.hong.auth.context.model.Token;
 import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.properties.CaptchaConfigProperties;
-import com.github.hong.auth.security.service.IAuthService;
+import com.github.hong.auth.context.security.service.IAuthService;
 import com.github.hong.auth.service.auth.ISysUserService;
 import com.github.hong.auth.service.auth.dto.RegisterDto;
 import com.github.hong.auth.service.captcha.ICaptchaService;

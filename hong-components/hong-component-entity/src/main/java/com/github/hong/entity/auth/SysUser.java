@@ -35,12 +35,8 @@ public class SysUser implements Serializable {
     private String sysUserId;
 
     @ApiModelProperty("登录用户名")
-    @TableField("login_username")
-    private String loginUsername;
-
-    @ApiModelProperty("真实姓名")
-    @TableField("real_name")
-    private String realName;
+    @TableField("login_name")
+    private String loginName;
 
     @ApiModelProperty("电子邮箱")
     @TableField("email")

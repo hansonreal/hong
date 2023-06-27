@@ -1,4 +1,4 @@
-package com.github.hong.auth.security.service.impl;
+package com.github.hong.auth.context.security.service.impl;
 
 import com.github.hong.auth.context.enums.IDTypeEnum;
 import com.github.hong.auth.context.enums.UserStateEnum;

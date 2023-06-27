@@ -1,5 +1,6 @@
-package com.github.hong.auth.security.authentication;
+package com.github.hong.auth.context.security.authentication;
 
+import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.core.base.result.ErrorR;
 import com.github.hong.core.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,10 @@ import java.io.Serializable;
 @Slf4j
 public class AuthenticationEntryPointCustomizer implements AuthenticationEntryPoint, Serializable {
 
-    public AuthenticationEntryPointCustomizer() {
-        log.info("AuthenticationEntryPointCustomizer --- 构建了");
+    private AuthConfigProperties authConfigProperties;
+
+    public AuthenticationEntryPointCustomizer(AuthConfigProperties authConfigProperties) {
+        this.authConfigProperties = authConfigProperties;
     }
 
     @Override

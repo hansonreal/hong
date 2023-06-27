@@ -52,7 +52,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
         if (!StringUtils.hasText(name)) {
             BizException.throwExp(ApiCodeEnum.NAME_NOT_BE_EMPTY_EXP);
         } else {
-            SysUser user = new SysUser().setName(name);
+            SysUser user = new SysUser().setLoginUsername(name);
             boolean repeated = isRepeated(user);
             if (repeated) {
                 BizException.throwExp(ApiCodeEnum.NAME_REPEATED_EXP, name);
@@ -98,7 +98,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
             if (!isMatch) {
                 BizException.throwExp(ApiCodeEnum.MOBILE_NUMBER_FORMAT_EXP, phone);
             }
-            SysUser user = new SysUser().setPhone(phone);
+            SysUser user = new SysUser().setTelPhone(phone);
             boolean repeated = isRepeated(user);
             if (repeated) {
                 BizException.throwExp(ApiCodeEnum.MOBILE_REPEATED_EXP, phone);
@@ -107,13 +107,13 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
 
         // 创建用户信息
         SysUser user = new SysUser()
-                .setName(name)
-                .setPhone(phone)
+                .setLoginUsername(name)
+                .setTelPhone(phone)
                 .setEmail(email)
                 //.setProfPicture()
-                .setLocked(UserStateEnum.UNLOCKED.getState())
-                .setCreateTime(new Date())
-                .setUpdateTime(new Date());
+                .setUserState(UserStateEnum.UNLOCKED.getState())
+                .setCreatedAt(new Date())
+                .setUpdatedAt(new Date());
         boolean save = save(user);
         if (save) {
             sysUserAuthService.buildDefaultUserAuth(user, pwd);
@@ -130,8 +130,8 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     @Override
     public boolean isRepeated(SysUser user) {
         LambdaQueryWrapper<SysUser> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(StringUtils.hasText(user.getName()), SysUser::getName, user.getName())
-                .eq(StringUtils.hasText(user.getTelPhone()), SysUser::getPhone, user.getPhone())
+        lambdaQueryWrapper.eq(StringUtils.hasText(user.getLoginUsername()), SysUser::getLoginUsername, user.getLoginUsername())
+                .eq(StringUtils.hasText(user.getTelPhone()), SysUser::getTelPhone, user.getTelPhone())
                 .eq(StringUtils.hasText(user.getEmail()), SysUser::getEmail, user.getEmail());
         return this.baseMapper.exists(lambdaQueryWrapper);
     }

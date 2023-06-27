@@ -1,7 +1,8 @@
 package com.github.hong.log.context.listener;
 
-import com.github.hong.entity.sys.Log;
+import com.github.hong.entity.log.SysLog;
 import com.github.hong.log.context.event.MethodLogEvent;
+import com.github.hong.log.service.ISysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -10,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MethodLogListener implements ApplicationListener<MethodLogEvent> {
 
-    private final ILogService logService;
+    private final ISysLogService sysLogService;
 
-    public MethodLogListener(ILogService logService) {
-        this.logService = logService;
+    public MethodLogListener(ISysLogService sysLogService) {
+        this.sysLogService = sysLogService;
     }
 
     /**
@@ -23,7 +24,7 @@ public class MethodLogListener implements ApplicationListener<MethodLogEvent> {
      */
     @Override
     public void onApplicationEvent(MethodLogEvent event) {
-        Log logSource = (Log) event.getSource();
-        logService.save(logSource);
+        SysLog logSource = (SysLog) event.getSource();
+        sysLogService.save(logSource);
     }
 }

@@ -1,4 +1,4 @@
-package com.github.hong.auth.security.util;
+package com.github.hong.auth.context.security.util;
 
 import com.github.hong.core.annotation.AnonAccess;
 import org.springframework.beans.BeansException;

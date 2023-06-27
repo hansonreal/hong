@@ -1,11 +1,11 @@
-package com.github.hong.auth.security;
+package com.github.hong.auth.context.security;
 
 import com.github.hong.auth.context.properties.AuthConfigProperties;
-import com.github.hong.auth.security.authentication.AuthenticationEntryPointCustomizer;
-import com.github.hong.auth.security.filter.JwtAuthenticationFilter;
-import com.github.hong.auth.security.handler.AccessDeniedHandlerCustomizer;
-import com.github.hong.auth.security.service.impl.UserDetailsServiceImpl;
-import com.github.hong.auth.security.util.SecurityContextExt;
+import com.github.hong.auth.context.security.authentication.AuthenticationEntryPointCustomizer;
+import com.github.hong.auth.context.security.filter.JwtAuthenticationFilter;
+import com.github.hong.auth.context.security.handler.AccessDeniedHandlerCustomizer;
+import com.github.hong.auth.context.security.service.impl.UserDetailsServiceImpl;
+import com.github.hong.auth.context.security.util.SecurityContextExt;
 import com.github.hong.core.utils.SpringBeanUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,8 +133,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()  // 由于使用的是JWT，这里不需要csrf（跨站请求伪造）
                 .cors()// 跨越配置支持，此处代码会自动加载一个bean名称为 corsFilter的Filter
-                .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPointCustomizer())// 认证失败处理方式
-                .accessDeniedHandler(new AccessDeniedHandlerCustomizer())//无权限操作异常处理
+                .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPointCustomizer(authConfigProperties))// 认证失败处理方式
+                .and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerCustomizer())//无权限操作异常处理
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 基于token，所以不需要session
                 .and().authorizeRequests().antMatchers(anonymousUrls.toArray(new String[0])).permitAll()//可以匿名被访问的URL
                 .and().authorizeRequests().anyRequest().authenticated()// 除上面外的所有请求全部需要鉴权认证

@@ -1,4 +1,4 @@
-package com.github.hong.auth.security.service.impl;
+package com.github.hong.auth.context.security.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.github.hong.auth.context.constants.AuthCS;
@@ -7,8 +7,8 @@ import com.github.hong.auth.context.model.JwtUserDetails;
 import com.github.hong.auth.context.model.JwtUserInfo;
 import com.github.hong.auth.context.model.Token;
 import com.github.hong.auth.context.properties.AuthConfigProperties;
+import com.github.hong.auth.context.security.service.IAuthService;
 import com.github.hong.auth.context.utils.JwtUtil;
-import com.github.hong.auth.security.service.IAuthService;
 import com.github.hong.core.base.code.ApiCodeEnum;
 import com.github.hong.core.exception.BizException;
 import com.github.hong.core.exception.BizExceptionCast;
