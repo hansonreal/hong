@@ -51,9 +51,8 @@ public class JwtUtil {
         String name = StringUtil.getObjectValue(body.get(AuthCS.JWT_KEY_NAME));
         String srtCreated = StringUtil.getObjectValue(body.get(AuthCS.JWT_KEY_CREATED));
         String cacheKey = StringUtil.getObjectValue(body.get(AuthCS.JWT_KEY_CACHE_KEY));
-        Long userId = NumberUtil.longValueOf0(strUserId);
         Long created = NumberUtil.longValueOf0(srtCreated);
-        return new JwtUserInfo(userId, name, created, cacheKey);
+        return new JwtUserInfo(strUserId, name, created, cacheKey);
     }
 
     /**

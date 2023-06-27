@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JwtUserInfo {
-    private Long userId;       //登录用户ID
+    private String userId;       //登录用户ID
     private String name;       // 用户名
     private Long created;      //创建时间, 格式：13位时间戳
     private String cacheKey;   //redis保存的key

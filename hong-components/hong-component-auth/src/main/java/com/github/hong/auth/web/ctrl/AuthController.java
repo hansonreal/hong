@@ -1,17 +1,17 @@
 package com.github.hong.auth.web.ctrl;
 
-import com.github.hong.auth.context.properties.AuthConfigProperties;
-import com.github.hong.auth.context.properties.CaptchaConfigProperties;
 import com.github.hong.auth.context.CaptchaContext;
 import com.github.hong.auth.context.constants.AuthCS;
 import com.github.hong.auth.context.enums.CaptchaReceiveMode;
 import com.github.hong.auth.context.model.Captcha;
 import com.github.hong.auth.context.model.Token;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
+import com.github.hong.auth.context.properties.CaptchaConfigProperties;
 import com.github.hong.auth.security.service.IAuthService;
-import com.github.hong.auth.service.ICaptchaService;
-import com.github.hong.auth.service.IUserService;
-import com.github.hong.auth.service.dto.CaptchaDto;
-import com.github.hong.auth.service.dto.RegisterDto;
+import com.github.hong.auth.service.auth.ISysUserService;
+import com.github.hong.auth.service.auth.dto.RegisterDto;
+import com.github.hong.auth.service.captcha.ICaptchaService;
+import com.github.hong.auth.service.captcha.dto.CaptchaDto;
 import com.github.hong.auth.web.request.CaptchaRequest;
 import com.github.hong.auth.web.request.LoginRequest;
 import com.github.hong.auth.web.request.RegisterRequest;
@@ -23,7 +23,7 @@ import com.github.hong.core.exception.BizException;
 import com.github.hong.core.utils.RsaUtil;
 import com.github.hong.core.utils.SpringBeanUtil;
 import com.github.hong.core.utils.StreamUtil;
-import com.github.hong.entity.auth.User;
+import com.github.hong.entity.auth.SysUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -51,7 +51,7 @@ public class AuthController {
 
     private final IAuthService authService;
 
-    private final IUserService userService;
+    private final ISysUserService sysUserService;
 
     private final AuthConfigProperties authConfigProperties;
 
@@ -59,11 +59,11 @@ public class AuthController {
     private final CaptchaConfigProperties captchaConfigProperties;
 
     public AuthController(IAuthService authService,
-                          IUserService userService,
+                          ISysUserService sysUserService,
                           AuthConfigProperties authConfigProperties,
                           CaptchaConfigProperties captchaConfigProperties) {
         this.authService = authService;
-        this.userService = userService;
+        this.sysUserService = sysUserService;
         this.authConfigProperties = authConfigProperties;
         this.captchaConfigProperties = captchaConfigProperties;
     }
@@ -146,9 +146,9 @@ public class AuthController {
         validaCaptchaInfo(captchaKey, captchaCode);
         RegisterDto registerDto = request.createRegisterDto();
         // 用户注册
-        User register = userService.register(registerDto);
+        SysUser register = sysUserService.register(registerDto);
         Map<String, String> result = new HashMap<>();
-        result.put("userId", String.valueOf(register.getUserId()));
+        result.put("userId", String.valueOf(register.getSysUserId()));
         return DataR.success(result);
     }
 

@@ -1,6 +1,5 @@
 package com.github.hong.log.config;
 
-import com.github.hong.log.config.LogBeanConfig;
 import org.springframework.context.annotation.Import;
 
 /**

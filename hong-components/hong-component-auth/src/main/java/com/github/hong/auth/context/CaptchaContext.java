@@ -1,7 +1,7 @@
 package com.github.hong.auth.context;
 
 import com.github.hong.auth.context.enums.CaptchaReceiveMode;
-import com.github.hong.auth.service.ICaptchaService;
+import com.github.hong.auth.service.captcha.ICaptchaService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

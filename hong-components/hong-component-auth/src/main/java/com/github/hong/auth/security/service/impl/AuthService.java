@@ -1,18 +1,18 @@
 package com.github.hong.auth.security.service.impl;
 
 import cn.hutool.core.util.IdUtil;
-import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.constants.AuthCS;
 import com.github.hong.auth.context.exception.RmsAuthenticationException;
 import com.github.hong.auth.context.model.JwtUserDetails;
 import com.github.hong.auth.context.model.JwtUserInfo;
 import com.github.hong.auth.context.model.Token;
+import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.utils.JwtUtil;
 import com.github.hong.auth.security.service.IAuthService;
 import com.github.hong.core.base.code.ApiCodeEnum;
 import com.github.hong.core.exception.BizException;
 import com.github.hong.core.exception.BizExceptionCast;
-import com.github.hong.entity.auth.User;
+import com.github.hong.entity.auth.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -78,15 +78,15 @@ public class AuthService implements IAuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticationRest);
 
         //6.生成token
-        User sysUser = jwtUserDetails.getSysUser();
+        SysUser sysUser = jwtUserDetails.getSysUser();
         long accessTokenExpSec = authConfigProperties.getAccessTokenExpSec();
-        String cacheKey = AuthCS.getCacheKeyToken(sysUser.getUserId(), IdUtil.fastUUID());
+        String cacheKey = AuthCS.getCacheKeyToken(sysUser.getSysUserId(), IdUtil.fastUUID());
         TokenService.processTokenCache(jwtUserDetails, cacheKey, accessTokenExpSec);
 
         //7.构建返回值
         PrivateKey privateKey = authConfigProperties.getPrivateKey();
         JwtUserInfo jwtUserInfo = new JwtUserInfo();
-        jwtUserInfo.setUserId(sysUser.getUserId());
+        jwtUserInfo.setUserId(sysUser.getSysUserId());
         jwtUserInfo.setCreated(System.currentTimeMillis());
         jwtUserInfo.setCacheKey(cacheKey);
         return JwtUtil.generateUserToken(jwtUserInfo,

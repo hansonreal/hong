@@ -1,6 +1,6 @@
 package com.github.hong.auth.context.model;
 
-import com.github.hong.entity.auth.User;
+import com.github.hong.entity.auth.SysUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -24,7 +24,7 @@ public class JwtUserDetails implements UserDetails {
     /**
      *
      */
-    private User sysUser;
+    private SysUser sysUser;
     /**
      * 密码
      **/
@@ -46,7 +46,7 @@ public class JwtUserDetails implements UserDetails {
     private String loginIp;
 
 
-    public JwtUserDetails(User sysUser, String credential) {
+    public JwtUserDetails(SysUser sysUser, String credential) {
         this.setSysUser(sysUser);
         this.setCredential(credential);
         //做一些初始化操作

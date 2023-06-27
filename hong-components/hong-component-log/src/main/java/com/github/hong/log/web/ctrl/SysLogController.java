@@ -1,10 +1,11 @@
 package com.github.hong.log.web.ctrl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.hong.core.annotation.MethodLog;
 import com.github.hong.core.base.result.PageR;
-import com.github.hong.entity.sys.Log;
-import com.github.hong.log.service.ILogService;
+import com.github.hong.entity.log.SysLog;
+import com.github.hong.log.service.ISysLogService;
 import com.github.hong.log.web.request.QueryLogRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022/9/19 0:20
  */
 @RestController
-@RequestMapping("/support/log")
+@RequestMapping("/log")
 @Api(value = "日志接口", tags = {"日志管理"})
 public class SysLogController {
 
-    private final ILogService logService;
+    private final ISysLogService sysLogService;
 
-    public SysLogController(ILogService logService) {
-        this.logService = logService;
+    public SysLogController(ISysLogService sysLogService) {
+        this.sysLogService = sysLogService;
     }
 
 
@@ -37,9 +38,9 @@ public class SysLogController {
     public PageR logs(
             @ApiParam(name = "logCmd", value = "日志查询对象", required = true)
             @Validated @RequestBody QueryLogRequest logCmd) throws Exception {
-        Log sysLog = new Log();
-        Page<Log> page = new Page<>(logCmd.getCurrent(), logCmd.getSize());
-        Page<Log> payLogPage = logService.querySysLogs(page, sysLog);
-        return PageR.ok(payLogPage.getTotal(), payLogPage.getRecords());
+        Page<SysLog> page = new Page<>(logCmd.getCurrent(), logCmd.getSize());
+        LambdaQueryWrapper<SysLog> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        Page<SysLog> sysLogPage = sysLogService.page(page, lambdaQueryWrapper);
+        return PageR.ok(sysLogPage.getTotal(), sysLogPage.getRecords());
     }
 }

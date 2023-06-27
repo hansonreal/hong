@@ -33,6 +33,12 @@
 
         <dependency>
             <groupId>com.github</groupId>
+            <artifactId>hong-component-log</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github</groupId>
             <artifactId>hong-component-support</artifactId>
             <version>1.0.0</version>
         </dependency>

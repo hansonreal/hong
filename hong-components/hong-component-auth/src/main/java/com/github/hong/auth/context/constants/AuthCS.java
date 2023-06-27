@@ -43,7 +43,7 @@ public final class AuthCS {
 
     }
 
-    public static String getCacheKeyToken(Long userId, String uuid) {
+    public static String getCacheKeyToken(String userId, String uuid) {
         return String.format(CACHE_KEY_TOKEN, userId, uuid);
     }
 

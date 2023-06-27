@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.hong.auth.context.enums.CaptchaReceiveMode;
 import com.github.hong.auth.context.enums.CaptchaTypeEnum;
 import com.github.hong.auth.context.enums.CaptchaUsageEnum;
-import com.github.hong.auth.service.dto.CaptchaDto;
+import com.github.hong.auth.service.captcha.dto.CaptchaDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

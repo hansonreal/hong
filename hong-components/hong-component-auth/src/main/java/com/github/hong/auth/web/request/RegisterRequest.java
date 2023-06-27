@@ -1,7 +1,7 @@
 package com.github.hong.auth.web.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.hong.auth.service.dto.RegisterDto;
+import com.github.hong.auth.service.auth.dto.RegisterDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

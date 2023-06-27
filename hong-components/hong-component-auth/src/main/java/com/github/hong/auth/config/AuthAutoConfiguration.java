@@ -1,6 +1,5 @@
 package com.github.hong.auth.config;
 
-import com.github.hong.auth.config.AuthBeanConfig;
 import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.properties.CaptchaConfigProperties;
 import org.mybatis.spring.annotation.MapperScan;

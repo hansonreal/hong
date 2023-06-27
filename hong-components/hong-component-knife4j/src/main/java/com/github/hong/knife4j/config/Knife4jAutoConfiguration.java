@@ -1,7 +1,6 @@
 package com.github.hong.knife4j.config;
 
 import com.github.hong.core.base.code.ApiCodeEnum;
-import com.github.hong.knife4j.config.Knife4jWebMvcConfig;
 import com.github.hong.knife4j.context.constants.SwaggerCS;
 import com.github.hong.knife4j.context.properties.SwaggerProperties;
 import com.github.xiaoymin.knife4j.spring.filter.ProductionSecurityFilter;

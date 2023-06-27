@@ -1,15 +1,15 @@
 package com.github.hong.auth.security.service.impl;
 
 import com.github.hong.auth.context.enums.IDTypeEnum;
-import com.github.hong.auth.context.enums.LockedStateEnum;
+import com.github.hong.auth.context.enums.UserStateEnum;
 import com.github.hong.auth.context.exception.RmsAuthenticationException;
 import com.github.hong.auth.context.model.JwtUserDetails;
-import com.github.hong.auth.service.IUserAuthService;
-import com.github.hong.auth.service.IUserService;
+import com.github.hong.auth.service.auth.ISysUserAuthService;
+import com.github.hong.auth.service.auth.ISysUserService;
 import com.github.hong.core.base.code.ApiCodeEnum;
 import com.github.hong.core.utils.RegUtil;
-import com.github.hong.entity.auth.User;
-import com.github.hong.entity.auth.UserAuth;
+import com.github.hong.entity.auth.SysUser;
+import com.github.hong.entity.auth.SysUserAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,10 +29,10 @@ import org.springframework.util.ObjectUtils;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private IUserService userService;
+    private ISysUserService sysUserService;
 
     @Autowired
-    private IUserAuthService userAuthService;
+    private ISysUserAuthService sysUserAuthService;
 
 
     /**
@@ -48,20 +48,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             idTypeEnum = IDTypeEnum.MOBILE;
         }
         //首先根据登录类型 + 用户名得到 信息
-        UserAuth userAuth = userAuthService.selectByLogin(username, idTypeEnum);
-        if (ObjectUtils.isEmpty(userAuth)) {
+        SysUserAuth sysUserAuth = sysUserAuthService.selectByLogin(username, idTypeEnum);
+        if (ObjectUtils.isEmpty(sysUserAuth)) {
             RmsAuthenticationException.throwExp(ApiCodeEnum.LOGIN_EXP);
         }
-        Long authUserId = userAuth.getUserId();
-        User awUser = userService.getById(authUserId);
-        if (ObjectUtils.isEmpty(awUser)) {
+        String sysUserId = sysUserAuth.getSysUserId();
+        SysUser sysUser = sysUserService.getById(sysUserId);
+        if (ObjectUtils.isEmpty(sysUser)) {
             RmsAuthenticationException.throwExp(ApiCodeEnum.LOGIN_EXP);
         }
-        String state = awUser.getLocked();
-        LockedStateEnum stateEnum = LockedStateEnum.getEnumByState(state);
-        if (stateEnum != LockedStateEnum.UNLOCKED) {
+        String state = sysUser.getUserState();
+        UserStateEnum stateEnum = UserStateEnum.getEnumByState(state);
+        if (stateEnum != UserStateEnum.UNLOCKED) {
             RmsAuthenticationException.throwExp(ApiCodeEnum.LOGIN_STATE_EXP);
         }
-        return new JwtUserDetails(awUser, userAuth.getCredential());
+        return new JwtUserDetails(sysUser, sysUserAuth.getCredential());
     }
 }

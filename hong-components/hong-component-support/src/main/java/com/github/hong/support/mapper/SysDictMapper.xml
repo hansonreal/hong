@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hong.log.mapper.support.SysDictMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.hong.entity.support.SysDict">
+        <id column="sys_dict_id" property="sysDictId" />
+        <result column="dict_name" property="dictName" />
+        <result column="dict_code" property="dictCode" />
+        <result column="dict_desc" property="dictDesc" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        sys_dict_id, dict_name, dict_code, dict_desc, del_flag, create_by, update_by, created_at, updated_at
+    </sql>
+
+</mapper>
