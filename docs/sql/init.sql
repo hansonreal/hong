@@ -4,14 +4,15 @@ CREATE TABLE `t_sys_log`
 (
     sys_log_id    bigint(20)   NOT NULL AUTO_INCREMENT COMMENT '系统日志标识',
     sys_user_id   bigint(20)            DEFAULT NULL COMMENT '系统用户标识',
-    user_name     VARCHAR(32)           DEFAULT NULL COMMENT '用户姓名',
+    login_name    VARCHAR(32)           DEFAULT NULL COMMENT '用户姓名',
     user_ip       VARCHAR(128) NOT NULL DEFAULT '' COMMENT '用户IP',
     method_name   VARCHAR(128) NOT NULL DEFAULT '' COMMENT '方法名',
-    method_remark VARCHAR(128) NOT NULL DEFAULT '' COMMENT '方法描述',
+    method_desc   VARCHAR(128) NOT NULL DEFAULT '' COMMENT '方法描述',
     req_url       VARCHAR(256) NOT NULL DEFAULT '' COMMENT '请求地址',
     opt_req_info  TEXT                  DEFAULT NULL COMMENT '操作请求参数',
     opt_res_info  TEXT                  DEFAULT NULL COMMENT '操作响应结果',
-    created_at    timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+    duration_time BIGINT(20)   NOT NULL DEFAULT 0 COMMENT '方法执行持续时间，单位毫秒',
+    created_at    TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     PRIMARY KEY (`sys_log_id`)
 ) ENGINE = INNODB
   AUTO_INCREMENT = 1

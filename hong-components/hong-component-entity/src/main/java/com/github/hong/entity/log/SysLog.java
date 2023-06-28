@@ -19,12 +19,12 @@ import java.util.Date;
  * </p>
  *
  * @author hansonreal
- * @since 2023-06-27
+ * @since 2023-06-28
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 @TableName("t_sys_log")
+@Accessors(chain = true)
 @ApiModel(value = "SysLog对象", description = "系统操作日志表")
 public class SysLog implements Serializable {
 
@@ -38,9 +38,9 @@ public class SysLog implements Serializable {
     @TableField("sys_user_id")
     private String sysUserId;
 
-    @ApiModelProperty("用户姓名")
-    @TableField("user_name")
-    private String userName;
+    @ApiModelProperty("登录姓名")
+    @TableField("login_name")
+    private String loginName;
 
     @ApiModelProperty("用户IP")
     @TableField("user_ip")
@@ -51,8 +51,8 @@ public class SysLog implements Serializable {
     private String methodName;
 
     @ApiModelProperty("方法描述")
-    @TableField("method_remark")
-    private String methodRemark;
+    @TableField("method_desc")
+    private String methodDesc;
 
     @ApiModelProperty("请求地址")
     @TableField("req_url")
@@ -65,6 +65,10 @@ public class SysLog implements Serializable {
     @ApiModelProperty("操作响应结果")
     @TableField("opt_res_info")
     private String optResInfo;
+
+    @ApiModelProperty("方法执行持续时间，单位毫秒")
+    @TableField("duration_time")
+    private String durationTime;
 
     @ApiModelProperty("创建时间")
     @TableField("created_at")

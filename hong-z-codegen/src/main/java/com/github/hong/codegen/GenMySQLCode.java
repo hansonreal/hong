@@ -53,20 +53,20 @@ public class GenMySQLCode {
                 .packageConfig(builder -> {
                     builder.parent("com.github.hong") // 设置父包名
                             //.moduleName("pay") // 设置父包模块名,系统表不需要父包模块名称ls.ov.ipay.thirdpay.wx.entity
-                            .entity("entity.auth")//实体包名
-                            .mapper("auth.mapper")// Mapper接口目录
-                            .xml("auth.mapper") //xml目录
-                            .service("auth.service")//service 目录
-                            .serviceImpl("auth.service.impl")//service impl 目录
-                            .controller("auth.web.ctrl") //ctrl 目录
+                            .entity("entity.log")//实体包名
+                            .mapper("log.mapper")// Mapper接口目录
+                            .xml("log.mapper") //xml目录
+                            .service("log.service")//service 目录
+                            .serviceImpl("log.service.impl")//service impl 目录
+                            .controller("log.web.ctrl") //ctrl 目录
                     ;
                 })
                 .strategyConfig(builder ->
                         // 设置需要生成的表名
                         builder.addInclude(
                                         //"T_SYS_CONFIG", "T_SYS_DICT", "T_SYS_DICT_ITEM"
-                                        "T_SYS_USER","T_SYS_USER_AUTH"
-                                //"T_SYS_LOG"
+                                        //"T_SYS_USER","T_SYS_USER_AUTH"
+                                "T_SYS_LOG"
                                 )
                                 .addTablePrefix("a_", "t_", "c_", "pf_") // 设置过滤表前缀
                                 .entityBuilder() // 实体构建器

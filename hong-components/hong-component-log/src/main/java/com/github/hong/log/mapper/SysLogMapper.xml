@@ -6,19 +6,20 @@
     <resultMap id="BaseResultMap" type="com.github.hong.entity.log.SysLog">
         <id column="sys_log_id" property="sysLogId" />
         <result column="sys_user_id" property="sysUserId" />
-        <result column="user_name" property="userName" />
+        <result column="login_name" property="loginName" />
         <result column="user_ip" property="userIp" />
         <result column="method_name" property="methodName" />
-        <result column="method_remark" property="methodRemark" />
+        <result column="method_desc" property="methodDesc" />
         <result column="req_url" property="reqUrl" />
         <result column="opt_req_info" property="optReqInfo" />
         <result column="opt_res_info" property="optResInfo" />
+        <result column="duration_time" property="durationTime" />
         <result column="created_at" property="createdAt" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        sys_log_id, sys_user_id, user_name, user_ip, method_name, method_remark, req_url, opt_req_info, opt_res_info, created_at
+        sys_log_id, sys_user_id, login_name, user_ip, method_name, method_desc, req_url, opt_req_info, opt_res_info, duration_time, created_at
     </sql>
 
 </mapper>

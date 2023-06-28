@@ -9,7 +9,7 @@ import com.github.hong.entity.log.SysLog;
  * </p>
  *
  * @author hansonreal
- * @since 2023-06-27
+ * @since 2023-06-28
  */
 public interface SysLogMapper extends BaseMapper<SysLog> {
 
