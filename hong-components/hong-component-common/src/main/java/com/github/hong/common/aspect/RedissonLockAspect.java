@@ -1,4 +1,4 @@
-package com.github.hong.core.aspect;
+package com.github.hong.common.aspect;
 
 import com.github.hong.core.annotation.RedissonLock;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Aspect
 @Order(1)
-@Component
 public class RedissonLockAspect {
 
     @Resource
@@ -24,7 +22,6 @@ public class RedissonLockAspect {
 
     @Around("@annotation(redissonLock)")
     public Object around(ProceedingJoinPoint joinPoint, RedissonLock redissonLock) throws Throwable {
-        Object obj;
         //方法内的所有参数
         Object[] params = joinPoint.getArgs();
         int lockIndex = redissonLock.lockIndex();
@@ -34,16 +31,21 @@ public class RedissonLockAspect {
         if (lockIndex != -1) {
             key += params[lockIndex];
         }
+        log.info("Redisson分布式锁名称:【{}】", key);
         //多久会自动释放，默认10秒
         int leaseTime = redissonLock.leaseTime();
+        log.debug("{}秒后Redisson分布式锁会自动释放，默认10秒", leaseTime);
         int waitTime = 5;
         RLock rLock = redisson.getLock(key);
         boolean res = rLock.tryLock(waitTime, leaseTime, TimeUnit.SECONDS);
+        Object obj;
         if (res) {
-            log.info("取到锁");
+            log.info("▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔取到锁▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔");
             obj = joinPoint.proceed();
-            rLock.unlock();
-            log.info("释放锁");
+            if (rLock.isHeldByCurrentThread()) {// 查询当前线程是否持有此锁定
+                rLock.unlock();// 此处可能出现 IllegalMonitorStateException: attempt to unlock lock，原因是超时锁被自动释放，此时再去手动释放就会抛出异常
+            }
+            log.info("▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁释放锁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁");
         } else {
             log.warn("----------没有获得锁----------");
             throw new RuntimeException("没有获得锁");

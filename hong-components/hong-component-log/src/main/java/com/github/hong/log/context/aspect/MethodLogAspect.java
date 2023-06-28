@@ -1,6 +1,7 @@
-package com.github.hong.core.aspect;
+package com.github.hong.log.context.aspect;
 
 import com.github.hong.core.annotation.MethodLog;
+import com.github.hong.entity.log.SysLog;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,20 +19,31 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
- * @className: AutoLogAspect
+ * @className: MethodLogAspect
  * @description: 切面处理类
  * @author: hanson
  */
 @Slf4j
 @Aspect
 @Component
-public class LogAspect {
+public class MethodLogAspect {
 
     /**
      * 异步处理线程池
      */
     private final static ScheduledExecutorService scheduledThreadPool
             = Executors.newScheduledThreadPool(10);
+
+    private static final ThreadLocal<SysLog> THREAD_LOCAL = new ThreadLocal<>();
+
+
+    private SysLog get() {
+        SysLog sysLog = THREAD_LOCAL.get();
+        if (sysLog == null) {
+            return new SysLog();
+        }
+        return sysLog;
+    }
 
 
 
@@ -41,21 +53,18 @@ public class LogAspect {
 
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         //执行方法
         Object result = point.proceed();
-
-        //执行时长(毫秒)
         stopWatch.stop();
+        //执行时长(毫秒)
         long time = stopWatch.getTotalTimeMillis();
         log.info("耗时:{}毫秒", time);
         //保存日志
-        scheduledThreadPool.execute(()->{
+        scheduledThreadPool.execute(() -> {
             saveSysLog(point, time, result);
         });
-
         return result;
     }
 
@@ -69,7 +78,7 @@ public class LogAspect {
     private void saveSysLog(ProceedingJoinPoint joinPoint, long time, Object obj) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        MethodLog autoLog = method.getAnnotation(MethodLog.class);
+        MethodLog methodLog = method.getAnnotation(MethodLog.class);
         //注解上的描述,操作日志内容
 //        if (autoLog != null) {
 //

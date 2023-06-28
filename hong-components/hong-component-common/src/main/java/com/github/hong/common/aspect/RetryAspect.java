@@ -1,4 +1,4 @@
-package com.github.hong.core.aspect;
+package com.github.hong.common.aspect;
 
 import com.github.hong.core.annotation.RetryOnFailure;
 import lombok.extern.slf4j.Slf4j;
@@ -6,14 +6,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Aspect
 @Order(1)//优先于Transactional注解
-@Component
 public class RetryAspect {
     // 最大重试次数
     public static final AtomicInteger MAX_RETRY_TIMES = new AtomicInteger(10);//max retry times

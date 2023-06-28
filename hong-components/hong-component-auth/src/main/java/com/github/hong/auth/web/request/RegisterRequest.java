@@ -58,11 +58,11 @@ public class RegisterRequest {
 
     @NotNull(message = "验证码KEY不能为空")
     @ApiModelProperty(value = "验证码Key", example = "00")
-    private String captchaKey;
+    private String verCodeKey;
 
     @NotNull(message = "验证码不能为空")
     @ApiModelProperty(value = "验证码", example = "653301")
-    private String captchaCode;
+    private String verCodeVal;
 
 
     @JsonIgnore

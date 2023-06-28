@@ -6,10 +6,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.hong.common.undertow.UndertowServerFactoryCustomizer;
+import com.github.hong.common.aspect.RedissonLockAspect;
+import com.github.hong.common.aspect.RetryAspect;
 import com.github.hong.core.utils.SpringBeanUtil;
 import io.undertow.Undertow;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +32,19 @@ public abstract class BaseConfig {
 
 
     @Bean
+    @ConditionalOnMissingBean(RetryAspect.class)
+    public RetryAspect retryAspect() {
+        return new RetryAspect();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(RedissonLockAspect.class)
+    public RedissonLockAspect redissonLockAspect() {
+        return new RedissonLockAspect();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SpringBeanUtil.class)
     public SpringBeanUtil getSpringUtils(ApplicationContext applicationContext) {
         SpringBeanUtil.setApplicationContext(applicationContext);
         return new SpringBeanUtil();
@@ -42,6 +58,7 @@ public abstract class BaseConfig {
      */
     @Bean
     @ConditionalOnProperty(name = "spring.datasource.driver-class-name", havingValue = "oracle.jdbc.OracleDriver", matchIfMissing = true)
+    @ConditionalOnMissingBean(OracleKeyGenerator.class)
     public IKeyGenerator oracleKeyGenerator() {
         return new OracleKeyGenerator();
     }
@@ -60,6 +77,7 @@ public abstract class BaseConfig {
 
 
     @Bean(name = {"redisTemplate", "stringRedisTemplate"})
+    @ConditionalOnMissingBean(StringRedisTemplate.class)
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate redisTemplate = new StringRedisTemplate();
         // 配置连接工厂

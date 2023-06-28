@@ -141,11 +141,12 @@ public class AuthController {
             @ApiParam(name = "request", value = "注册请求对象", required = true)
             @Validated @RequestBody RegisterRequest request) {
         // 校验验证码信息
-        String captchaKey = request.getCaptchaKey();
-        String captchaCode = request.getCaptchaCode();
+        String captchaKey = request.getVerCodeKey();
+        String captchaCode = request.getVerCodeVal();
         validaCaptchaInfo(captchaKey, captchaCode);
-        RegisterDto registerDto = request.createRegisterDto();
+
         // 用户注册
+        RegisterDto registerDto = request.createRegisterDto();
         SysUser register = sysUserService.register(registerDto);
         Map<String, String> result = new HashMap<>();
         result.put("userId", String.valueOf(register.getSysUserId()));

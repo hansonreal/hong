@@ -8,6 +8,7 @@ import com.github.hong.auth.mapper.SysUserMapper;
 import com.github.hong.auth.service.auth.ISysUserAuthService;
 import com.github.hong.auth.service.auth.ISysUserService;
 import com.github.hong.auth.service.auth.dto.RegisterDto;
+import com.github.hong.core.annotation.RedissonLock;
 import com.github.hong.core.base.code.ApiCodeEnum;
 import com.github.hong.core.exception.BizException;
 import com.github.hong.core.utils.RegUtil;
@@ -46,6 +47,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
      * @return 用户信息
      */
     @Override
+    @RedissonLock
     public SysUser register(RegisterDto registerDto) {
         // 用户名校验
         String name = registerDto.getName();
