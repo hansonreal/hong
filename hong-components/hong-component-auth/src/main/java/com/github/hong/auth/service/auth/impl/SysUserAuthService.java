@@ -10,6 +10,7 @@ import com.github.hong.entity.auth.SysUser;
 import com.github.hong.entity.auth.SysUserAuth;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.List;
  * @since 2023-06-27
  */
 @Service
+@Transactional
 public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAuth> implements ISysUserAuthService {
 
     /**
@@ -49,6 +51,7 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
     @Override
     public List<SysUserAuth> buildDefaultUserAuth(SysUser user, String pwdRaw) {
         String salt = StringUtil.getUUID(6); //6位随机数
+
         BCryptPasswordEncoder bCryptPasswordEncoder = SpringBeanUtil.getBean(BCryptPasswordEncoder.class);
         String encode = bCryptPasswordEncoder.encode(pwdRaw);
         String userId = user.getSysUserId();

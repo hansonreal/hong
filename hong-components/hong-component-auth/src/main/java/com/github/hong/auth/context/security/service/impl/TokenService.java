@@ -1,7 +1,7 @@
 package com.github.hong.auth.context.security.service.impl;
 
 
-import com.github.hong.auth.context.model.JwtUserDetails;
+import com.github.hong.common.security.JwtUserDetails;
 import com.github.hong.core.cache.RedisService;
 
 /**

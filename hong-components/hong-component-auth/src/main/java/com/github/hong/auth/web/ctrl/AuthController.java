@@ -140,11 +140,14 @@ public class AuthController {
     public DataR<Map<String, String>> register(
             @ApiParam(name = "request", value = "注册请求对象", required = true)
             @Validated @RequestBody RegisterRequest request) {
-        // 校验验证码信息
-        String captchaKey = request.getVerCodeKey();
-        String captchaCode = request.getVerCodeVal();
-        validaCaptchaInfo(captchaKey, captchaCode);
-
+        // 是否开启验证码
+        boolean enabledCaptcha = captchaConfigProperties.isEnabled();
+        if (enabledCaptcha){
+            // 校验验证码信息
+            String captchaKey = request.getVerCodeKey();
+            String captchaCode = request.getVerCodeVal();
+            validaCaptchaInfo(captchaKey, captchaCode);
+        }
         // 用户注册
         RegisterDto registerDto = request.createRegisterDto();
         SysUser register = sysUserService.register(registerDto);

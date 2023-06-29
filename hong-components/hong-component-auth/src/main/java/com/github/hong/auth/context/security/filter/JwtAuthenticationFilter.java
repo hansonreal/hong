@@ -1,9 +1,9 @@
 package com.github.hong.auth.context.security.filter;
 
-import com.github.hong.auth.context.model.JwtUserDetails;
 import com.github.hong.auth.context.model.JwtUserInfo;
 import com.github.hong.auth.context.properties.AuthConfigProperties;
 import com.github.hong.auth.context.utils.JwtUtil;
+import com.github.hong.common.security.JwtUserDetails;
 import com.github.hong.core.cache.RedisService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,6 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(jwtUserDetails, null, jwtUserDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }

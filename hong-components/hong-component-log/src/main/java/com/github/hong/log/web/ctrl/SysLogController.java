@@ -33,9 +33,9 @@ public class SysLogController {
 
 
     @PostMapping("/logs")
-    @MethodLog("日志查询")
+    @MethodLog(value = "日志查询",recordRespParam = false)
     @ApiOperation(value = "日志查询", notes = "日志查询")
-    public PageR logs(
+    public PageR<SysLog> logs(
             @ApiParam(name = "logCmd", value = "日志查询对象", required = true)
             @Validated @RequestBody QueryLogRequest logCmd) throws Exception {
         Page<SysLog> page = new Page<>(logCmd.getCurrent(), logCmd.getSize());

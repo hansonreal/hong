@@ -51,7 +51,7 @@ mybatis-plus:
       id-type: input
 hong:
   captcha:
-    enabled: true # 是否开启验证码
+    enabled: false # 是否开启验证码
     expire: 300 # 验证码有效期，单位秒
   auth:
     allow-cross-origin: true # 是否开启跨域，开发环境建议开启，生产环境建议再NG上进行配置

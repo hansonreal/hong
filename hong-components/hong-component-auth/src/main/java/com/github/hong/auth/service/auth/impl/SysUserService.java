@@ -17,6 +17,7 @@ import com.github.hong.entity.auth.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.security.PrivateKey;
@@ -32,6 +33,7 @@ import java.util.Date;
  */
 @Slf4j
 @Service
+@Transactional
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
     @Autowired
@@ -63,13 +65,14 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
 
         // 密码校验
         String pwd = registerDto.getPwd();
+        String pwdSrc = "";
         if (!StringUtils.hasText(pwd)) {
             BizException.throwExp(ApiCodeEnum.PWD_NOT_BE_EMPTY_EXP);
         } else {
             PrivateKey privateKey = authConfigProperties.getPrivateKey();
             try {
-                String pwdSrc = RsaUtil.decrypt(pwd, privateKey);
-                // 密码规则校验
+                pwdSrc = RsaUtil.decrypt(pwd, privateKey);
+                // TODO 密码规则校验
                 log.info("前台键入的密码为:{}", pwdSrc);
             } catch (Exception e) {
                 log.error("注册 -- 密码还原失败:", e);
@@ -118,7 +121,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
                 .setUpdatedAt(new Date());
         boolean save = save(user);
         if (save) {
-            sysUserAuthService.buildDefaultUserAuth(user, pwd);
+            sysUserAuthService.buildDefaultUserAuth(user, pwdSrc);
         }
         return user;
     }

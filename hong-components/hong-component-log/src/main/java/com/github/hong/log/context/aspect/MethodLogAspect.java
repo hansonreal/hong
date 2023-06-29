@@ -68,7 +68,6 @@ public class MethodLogAspect {
 
 
     private void saveSysLog(JoinPoint joinPoint, long durationTime, Object result) {
-        SysLog sysLog = new SysLog();
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         MethodLog methodLog = method.getAnnotation(MethodLog.class);
@@ -76,6 +75,7 @@ public class MethodLogAspect {
         if (ObjectUtils.isEmpty(methodLog)) {
             return;
         }
+        SysLog sysLog = new SysLog();
         // 创建时间
         DateTime now = DateTime.now();
         sysLog.setCreatedAt(now.toJdkDate());
