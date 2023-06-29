@@ -31,8 +31,8 @@ public class LoginRequest {
     private String password;
 
     @ApiModelProperty(value = "验证码Key", example = "00")
-    private String captchaKey;
+    private String verCodeKey;
 
-    @ApiModelProperty(value = "验证码", example = "653301")
-    private String captchaCode;
+    @ApiModelProperty(value = "验证码值", example = "653301")
+    private String verCodeVal;
 }

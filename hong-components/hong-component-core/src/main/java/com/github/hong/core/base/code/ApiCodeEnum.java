@@ -42,6 +42,8 @@ public enum ApiCodeEnum implements IResultCode {
 
     REGISTER_FAILED_EXP("419", "注册失败，请联系管理员！"),
 
+    PWD_PLAINTEXT_EXP("420", "请核实密码是否为明文传输"),
+
     AUTH_SERVER_EXP("499", "认证服务发生异常，请联系管理员！"),
     INVALID_PARAM("500", "非法参数"),
     VALID_METHOD_ARGS_OCCURRED_EXP("501", "校验方法参数发生异常"),

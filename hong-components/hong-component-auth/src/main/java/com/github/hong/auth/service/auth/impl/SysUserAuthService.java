@@ -36,7 +36,7 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
      */
     @Override
     public SysUserAuth selectByLogin(String username, IDTypeEnum idTypeEnum) {
-        return null;
+        return this.baseMapper.selectByLogin(username,idTypeEnum.getIdType());
     }
 
     /**

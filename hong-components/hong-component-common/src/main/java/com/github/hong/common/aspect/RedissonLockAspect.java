@@ -47,7 +47,7 @@ public class RedissonLockAspect {
             }
             log.info("▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁释放锁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁");
         } else {
-            log.warn("----------没有获得锁----------");
+            log.warn("----------没有获得锁----------抛出异常不让目标方法执行");
             throw new RuntimeException("没有获得锁");
         }
         return obj;

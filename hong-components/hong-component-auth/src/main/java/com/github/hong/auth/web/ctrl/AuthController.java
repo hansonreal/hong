@@ -81,9 +81,9 @@ public class AuthController {
         boolean enabledCaptcha = captchaConfigProperties.isEnabled();
         String captchaKey = null;
         if (enabledCaptcha) {
-            captchaKey = loginRequest.getCaptchaKey();
+            captchaKey = loginRequest.getVerCodeKey();
             // 校验验证码信息
-            String captchaCode = loginRequest.getCaptchaCode();
+            String captchaCode = loginRequest.getVerCodeVal();
             validaCaptchaInfo(captchaKey, captchaCode);
         }
         // 处理认证

@@ -12,6 +12,7 @@ import com.github.hong.auth.context.utils.JwtUtil;
 import com.github.hong.core.base.code.ApiCodeEnum;
 import com.github.hong.core.exception.BizException;
 import com.github.hong.core.exception.BizExceptionCast;
+import com.github.hong.core.utils.RsaUtil;
 import com.github.hong.entity.auth.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -54,10 +55,17 @@ public class AuthService implements IAuthService {
     @Override
     public Token auth(String username, String password) {
         //1.生成spring-security usernamePassword类型对象
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+        String decrypt = null;
+        try {
+            decrypt = RsaUtil.decrypt(password, authConfigProperties.getPrivateKey());
+        } catch (Exception e) {
+            BizException.throwExp(ApiCodeEnum.PWD_PLAINTEXT_EXP);
+        }
         //2.手动认证
         Authentication authentication = null;
         try {
+            UsernamePasswordAuthenticationToken upToken
+                    = new UsernamePasswordAuthenticationToken(username, decrypt);
             authentication = authenticationManager.authenticate(upToken);
         } catch (RmsAuthenticationException rmsExp) {
             throw rmsExp.getBizException() == null ? new BizException(rmsExp.getMessage()) : rmsExp.getBizException();
