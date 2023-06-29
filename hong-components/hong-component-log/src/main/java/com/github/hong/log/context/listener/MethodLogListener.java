@@ -5,6 +5,7 @@ import com.github.hong.log.context.event.MethodLogEvent;
 import com.github.hong.log.service.ISysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -23,6 +24,7 @@ public class MethodLogListener implements ApplicationListener<MethodLogEvent> {
      * @param event the event to respond to
      */
     @Override
+    @Async("hongAsyncExecutor")
     public void onApplicationEvent(MethodLogEvent event) {
         SysLog logSource = event.getLog();
         sysLogService.save(logSource);

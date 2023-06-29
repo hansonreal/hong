@@ -1,6 +1,6 @@
 package com.github.hong.log.context.properties;
 
-import com.github.hong.common.thread.ThreadConfig;
+import com.github.hong.common.thread.ThreadConfigProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -17,6 +17,6 @@ public class LogConfigProperties {
     /**
      * 日志线程池配置
      */
-    private ThreadConfig thread = new ThreadConfig().setNamePrefix("hong-async-log");
+    private ThreadConfigProperties thread = new ThreadConfigProperties().setNamePrefix("hong-async-log");
 
 }

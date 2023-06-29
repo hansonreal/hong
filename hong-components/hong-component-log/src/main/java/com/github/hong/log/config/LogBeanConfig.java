@@ -1,7 +1,7 @@
 package com.github.hong.log.config;
 
 import com.github.hong.common.config.BaseConfig;
-import com.github.hong.common.thread.ThreadConfig;
+import com.github.hong.common.thread.ThreadConfigProperties;
 import com.github.hong.common.thread.ThreadPoolTaskExecutorWrapper;
 import com.github.hong.log.context.properties.LogConfigProperties;
 import org.mybatis.spring.annotation.MapperScan;
@@ -28,7 +28,7 @@ public class LogBeanConfig extends BaseConfig {
     @Bean(name = "logAsyncServiceExecutor")
     public Executor orderAsyncServiceExecutor(
             LogConfigProperties properties) {
-        ThreadConfig thread = properties.getThread();
+        ThreadConfigProperties thread = properties.getThread();
         //SpringBoot项目，可使用Spring提供的对 ThreadPoolExecutor 封装的线程池 ThreadPoolTaskExecutor：
         // ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         ThreadPoolTaskExecutorWrapper executor = new ThreadPoolTaskExecutorWrapper();//自定义ThreadPoolTaskExecutor，会打印线程池情况
