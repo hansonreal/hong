@@ -85,6 +85,8 @@ public class MethodLogAspect {
         sysLog.setMethodDesc(methodDesc);
 
         // 用户名&用户标识
+        sysLog.setSysUserId("1");
+        sysLog.setLoginName("匿名");
         JwtUserDetails jwtUserDetails = JwtUserDetails.getCurrentUserDetails();
         if (!ObjectUtils.isEmpty(jwtUserDetails)) {
             SysUser sysUser = jwtUserDetails.getSysUser();

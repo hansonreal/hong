@@ -44,7 +44,7 @@ public class JwtUtil {
      * @param publicKey 公钥
      * @return JwtUserInfo
      */
-    public static JwtUserInfo getJwtFromToken(String token, PublicKey publicKey) {
+    public static JwtUserInfo getJwtFromToken(String token, PublicKey publicKey)throws Exception {
         Jws<Claims> claimsJws = parserToken(token, publicKey);
         Claims body = claimsJws.getBody();
         String strUserId = body.getSubject();
@@ -84,7 +84,7 @@ public class JwtUtil {
      * @return 返回结果
      * @throws BizException 异常信息
      */
-    public static Jws<Claims> parserToken(String token, PublicKey publicKey) {
+    public static Jws<Claims> parserToken(String token, PublicKey publicKey) throws Exception{
         try {
             return Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(token);
         } catch (ExpiredJwtException ex) {

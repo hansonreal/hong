@@ -5,6 +5,7 @@ import com.github.hong.auth.service.auth.ISysUserService;
 import com.github.hong.entity.auth.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -25,6 +26,7 @@ public class LoginEventListener implements ApplicationListener<LoginEvent> {
     }
 
     @Override
+    @Async("hongAsyncExecutor")
     public void onApplicationEvent(LoginEvent loginEvent) {
         String userId = loginEvent.getUserId();
         SysUser byId = sysUserService.getById(userId);

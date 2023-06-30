@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * 认证自动配置类
@@ -22,5 +23,6 @@ import org.springframework.context.annotation.Import;
 })
 @MapperScan("com.github.hong.auth.mapper")
 @ComponentScan({"com.github.hong.auth"})
+@EnableAsync
 public class AuthAutoConfiguration {
 }
