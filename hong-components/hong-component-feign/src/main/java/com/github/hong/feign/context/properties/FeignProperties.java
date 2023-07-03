@@ -1,9 +1,7 @@
-package com.github.hong.feign.config;
+package com.github.hong.feign.context.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import java.time.Duration;
 
 /**
  * feign配置文件
@@ -20,17 +18,17 @@ public class FeignProperties {
     /**
      * 与服务地址建立连接的最大超时时间
      */
-    private Duration connectTimeout = Duration.ofSeconds(60);
+    private long connectTimeout = 60;
 
     /**
      * 请求最大超时时间,单位秒
      */
-    private Duration readTimeout = Duration.ofSeconds(300);
+    private long readTimeout = 300;
 
     /**
      * 响应最大超时时间,单位秒
      */
-    private Duration writeTimeout = Duration.ofSeconds(300);
+    private long writeTimeout = 300;
 
     /**
      * 远程调用地址

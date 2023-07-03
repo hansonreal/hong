@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Configuration
 @ComponentScan("com.github.hong.feign")
-public class FeignConfiguration extends BaseConfig {
+public class FeignBeanConfig extends BaseConfig {
 
     @Bean
     @Primary

@@ -1,4 +1,4 @@
-package com.github.hong.feign.hystrix;
+package com.github.hong.feign.context.hystrix;
 
 import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
@@ -21,7 +21,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 自定义并发策略
+ * 自定义并发策略(需要交给Spring管理)
  *
  * @author hanson
  * @since 2023/5/19
@@ -32,7 +32,7 @@ public class RequestAttributeHystrixConcurrencyStrategy extends HystrixConcurren
 
     public RequestAttributeHystrixConcurrencyStrategy() {
         try {
-            log.info("加载RequestAttributeHystrixConcurrencyStrategy");
+            log.info(" -- 加载RequestAttributeHystrixConcurrencyStrategy -- ");
             this.delegate = HystrixPlugins.getInstance().getConcurrencyStrategy();
             if (this.delegate instanceof RequestAttributeHystrixConcurrencyStrategy) {
                 // Welcome to singleton hell...

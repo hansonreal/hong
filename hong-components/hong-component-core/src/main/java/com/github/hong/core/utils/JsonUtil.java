@@ -1,16 +1,12 @@
 package com.github.hong.core.utils;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -18,28 +14,7 @@ import java.util.Map;
 @Slf4j
 public class JsonUtil {
 
-    public static final ObjectMapper mapper = new ObjectMapper();
-
-    static {
-        // 属性为默认值不序列化
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
-        //属性为NULL 不序列化
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        // 取消默认转换timestamps形式
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        // 忽略空bean转json的错误
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-
-        // 统一日期格式yyyy-MM-dd HH:mm:ss
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-
-        // 忽略在json字符串中存在,但是在java对象中不存在对应属性的情况
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        //
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-
-    }
+    public static final ObjectMapper mapper = SpringBeanUtil.getBean(ObjectMapper.class);
 
     /**
      * JSON序列化
