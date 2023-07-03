@@ -15,36 +15,35 @@ import java.util.stream.Stream;
 
 /**
  * 描述：日期工具类
- *
  */
 @Slf4j
 public class DateUtil {
-    public final static String DEFAULT_YEAR_FORMAT = "yyyy";
-    public final static String DEFAULT_MONTH_FORMAT = "yyyy-MM";
-    public final static String DEFAULT_MONTH_FORMAT_SLASH = "yyyy/MM";
-    public final static String DEFAULT_MONTH_FORMAT_EN = "yyyy年MM月";
-    public final static String DEFAULT_WEEK_FORMAT = "yyyy-ww";
-    public final static String DEFAULT_WEEK_FORMAT_EN = "yyyy年ww周";
-    public final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-    public final static String DEFAULT_DATE_FORMAT_EN = "yyyy年MM月dd日";
-    public final static String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    public final static String DEFAULT_TIME_FORMAT = "HH:mm:ss";
-    public final static String DAY = "DAY";
-    public final static String MONTH = "MONTH";
-    public final static String WEEK = "WEEK";
+    public static final String DEFAULT_YEAR_FORMAT = "yyyy";
+    public static final String DEFAULT_MONTH_FORMAT = "yyyy-MM";
+    public static final String DEFAULT_MONTH_FORMAT_SLASH = "yyyy/MM";
+    public static final String DEFAULT_MONTH_FORMAT_EN = "yyyy年MM月";
+    public static final String DEFAULT_WEEK_FORMAT = "yyyy-ww";
+    public static final String DEFAULT_WEEK_FORMAT_EN = "yyyy年ww周";
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DEFAULT_DATE_FORMAT_EN = "yyyy年MM月dd日";
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+    public static final String DAY = "DAY";
+    public static final String MONTH = "MONTH";
+    public static final String WEEK = "WEEK";
 
     /**
      * 一个月平均天数
      */
-    public final static long MAX_MONTH_DAY = 30;
+    public static final long MAX_MONTH_DAY = 30;
     /**
      * 3个月平均天数
      */
-    public final static long MAX_3_MONTH_DAY = 90;
+    public static final long MAX_3_MONTH_DAY = 90;
     /**
      * 一年平均天数
      */
-    public final static long MAX_YEAR_DAY = 365;
+    public static final long MAX_YEAR_DAY = 365;
 
 
     private DateUtil() {
