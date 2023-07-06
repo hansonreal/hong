@@ -41,7 +41,9 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <resources>
-            <!--mapper.xml进行打包处理，否则仅对java文件处理 -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
