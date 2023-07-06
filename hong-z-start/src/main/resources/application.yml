@@ -50,6 +50,12 @@ mybatis-plus:
     db-config:
       id-type: input
 hong:
+  thread:
+    core-pool-size: 20 #配置核心线程数
+    max-pool-size: 300 #配置最大线程数
+    queue-capacity: 10 #配置队列大小
+    keep-alive-seconds: 60 # 允许的空闲时间
+    name-prefix: hong-async- #配置线程池中的线程的名称前缀
   captcha:
     enabled: false # 是否开启验证码
     expire: 300 # 验证码有效期，单位秒
