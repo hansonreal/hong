@@ -15,20 +15,24 @@ public class ThreadConfigProperties {
 
     public static final String THREAD_PREFIX = "hong.thread";
     /**
-     * 配置核心线程数
+     * 线程池维护线程的最少数量，根据机器的配置进行添加
      */
-    private int corePoolSize = 5;
+    private int corePoolSize = 20;
 
     /**
-     * 配置最大线程数
+     * 线程池维护线程的最大数量
      */
-    private int maxPoolSize = 10;
+    private int maxPoolSize = 300;
 
     /**
-     * 配置队列大小
+     * 缓存队列
      */
-    private int queueCapacity = 100;
+    private int queueCapacity = 10;
 
+    /**
+     * 允许的空闲时间
+     */
+    private int keepAliveSeconds = 60;
 
     /**
      * 配置线程池中的线程的名称前缀

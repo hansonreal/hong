@@ -140,18 +140,22 @@ public abstract class BaseConfig {
     }
 
     /**
-     * 自定义线程池配置类。
-     * 不要命名为 taskScheduler，与spring框架的bean重名。
+     * 功能描述: 自定义异步执行器
+     * 不要命名为 taskScheduler，与spring框架的bean重名
+     * 用于处理系统执行日志 ，对于量大的业务需要单独再创建一个自定义异步执行器来处理
+     * 20, 300, 10, 60  该配置： 同一时间最大并发量300，（已经验证通过， 商户都可以收到请求消息）
+     * 缓存队列尽量减少，否则将堵塞在队列中无法执行。
+     * corePoolSize 根据机器的配置进行添加。此处设置的为20
      *
-     * @return
+     * @return 异步执行器
      */
     @Bean(name = "hongAsyncExecutor")
     public Executor hongAsyncExecutor(
             ThreadConfigProperties properties) {
-        //log.info("订单线程池配置信息:\n{}", JsonUtil.serialize(thread));
         //SpringBoot项目，可使用Spring提供的对 ThreadPoolExecutor 封装的线程池 ThreadPoolTaskExecutor：
         // ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        ThreadPoolTaskExecutorWrapper executor = new ThreadPoolTaskExecutorWrapper();//自定义ThreadPoolTaskExecutor，会打印线程池情况
+        //自定义ThreadPoolTaskExecutor，会打印线程池情况
+        ThreadPoolTaskExecutorWrapper executor = new ThreadPoolTaskExecutorWrapper();
         //配置核心线程数
         executor.setCorePoolSize(properties.getCorePoolSize());
         //配置最大线程数
@@ -168,6 +172,8 @@ public abstract class BaseConfig {
          * CallerRunsPolicy:由调用线程处理该任务
          */
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        // 允许的空闲时间
+        executor.setKeepAliveSeconds(properties.getKeepAliveSeconds());
         //执行初始化
         executor.initialize();
         return executor;
