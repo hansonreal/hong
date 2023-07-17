@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -50,6 +51,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -104,16 +106,27 @@ public abstract class BaseConfig {
                 .build();
 
         objectMapper
-                //.setLocale(Locale.CHINA)
+                // 如果java对象的属性为NULL则不参与序列化，即java对象序列化后的json串里不出现属性为null的字段。
+                // 该功能可以使用@JsonInclude注解，也可以设置objectMapper属性。
+                // 关闭属性为NULL还序列化功能，默认是开启
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                // 设置地理位置信息
+                .setLocale(Locale.CHINA)
+                // 默认情况下ObjectMapper序列化没有属性的空对象时会抛异常。可以通过SerializationFeature.FAIL_ON_EMPTY_BEANS设置当对象没有属性时，让其序列化能成功，不抛异常。
+                // 对象属性为空时，默认序列化会失败
                 .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                // 忽略在json字符串中存在,但是在java对象中不存在对应属性的情况
+                // 默认情况下ObjectMapper序列化没有属性的空对象时会抛异常。可以通过SerializationFeature.FAIL_ON_EMPTY_BEANS设置当对象没有属性时，让其序列化能成功，不抛异常。
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 // 该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。
                 // 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
                 .configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
-                // 忽略不能转移的字符
+                // 设置解析能识别JSON串里的注释符
+                // 当反序列化的JSON串里带有反斜杠时，默认objectMapper反序列化会失败，抛出异常Unrecognized character escape。
+                // 可以通过Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER来设置当反斜杠存在时，能被objectMapper反序列化。
                 .configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(), true)
-                //单引号处理
+                // 当json字符串里带注释符时，默认情况下解析器不能解析。Feature.ALLOW_COMMENTS特性决定解析器是否允许解析使用Java/C++ 样式的注释（包括'/'+'*' 和'//' 变量）。
+                .configure(JsonReadFeature.ALLOW_JAVA_COMMENTS.mappedFeature(), true)
+                //parser解析器默认情况下不能识别单引号包住的属性和属性值，默认下该属性也是关闭的。需要设置JsonParser.Feature.ALLOW_SINGLE_QUOTES为true。
                 .configure(JsonReadFeature.ALLOW_SINGLE_QUOTES.mappedFeature(), true)
                 //日期格式
                 .setDateFormat(new SimpleDateFormat(DateUtil.DEFAULT_DATE_TIME_FORMAT));

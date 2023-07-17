@@ -138,3 +138,16 @@ CREATE TABLE `sys_dict_item`
 ) ENGINE = INNODB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4 COMMENT = '系统字典分项表';
+
+
+-- -- 第三方支付
+-- 支付单表
+DROP TABLE IF EXISTS `t_pay_order`;
+
+-- 退款单表
+DROP TABLE IF EXISTS `t_refund_order`;
+
+-- 通知记录表
+DROP TABLE IF EXISTS `t_notify_record`;
+
+-- 单边账表
