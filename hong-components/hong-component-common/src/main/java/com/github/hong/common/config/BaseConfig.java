@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +37,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -63,6 +62,24 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Slf4j
 public abstract class BaseConfig {
+
+
+    /**
+     * 构建redis消息监听容器
+     * 需要打开redis
+     * 配置项 rename-command CONFIG "" 需要注释掉改配置项 可选
+     * （如果实在需要开启，则需要再实现类中禁用改方法的调用 ，详情见 ls.ov.rms.auth.context.listener.RedisKeyExpirationListener）
+     * 配置项 notify-keyspace-events Ex 必须
+     *
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean
+    public RedisMessageListenerContainer container(RedisConnectionFactory redisConnectionFactory) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(redisConnectionFactory);
+        return container;
+    }
 
 
     /**
@@ -246,17 +263,18 @@ public abstract class BaseConfig {
      */
     @Bean(name = {"redisTemplate", "stringRedisTemplate"})
     @ConditionalOnMissingBean(StringRedisTemplate.class)
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
+    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory,
+                                                   ObjectMapper jacksonObjectMapper) {
         StringRedisTemplate redisTemplate = new StringRedisTemplate();
         // 配置连接工厂
         redisTemplate.setConnectionFactory(factory);
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
         Jackson2JsonRedisSerializer<Object> jacksonSeial = new Jackson2JsonRedisSerializer<>(Object.class);
 
-        ObjectMapper om = new ObjectMapper();
+        //ObjectMapper om = new ObjectMapper();
         // 指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        jacksonSeial.setObjectMapper(om);
+        // om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        jacksonSeial.setObjectMapper(jacksonObjectMapper);
 
         // 值采用json序列化
         redisTemplate.setValueSerializer(jacksonSeial);
